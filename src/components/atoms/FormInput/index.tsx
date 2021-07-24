@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 
 type FormInputProps = {
@@ -24,8 +24,7 @@ const UnderLine = styled.div`
   border-top: 1px solid #c2c2c2;
 `;
 
-export const FormInput = (props: FormInputProps) => {
-  const { type, placeholder } = props;
+export const FormInput: FC<FormInputProps> = ({ type, placeholder }) => {
   return (
     <Wrapper>
       <StyledInput type={type} placeholder={placeholder} />

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 
 type ButtonProps = {
@@ -18,7 +18,6 @@ const StyledFormButton = styled.input`
   outline: none;
 `;
 
-export const FormButton = (props: ButtonProps) => {
-  const { value } = props;
+export const FormButton: FC<ButtonProps> = ({ value }) => {
   return <StyledFormButton type="button" value={value} />;
 };
