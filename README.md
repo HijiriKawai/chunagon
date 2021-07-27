@@ -2,14 +2,15 @@
 
 front end app
 
-| 種類                    | 名前              |
-| ----------------------- | ----------------- |
-| パッケージマネージャー  | yarn              |
-| リンター                | eslint            |
-| コードフォーマッタ      | prettier          |
-| UI Component 管理ツール | Storybook         |
-| jsフレームワーク        | React             |
-| Css in js               | styled-components |
+| 種類                    | 名前                   |
+| ----------------------- | ---------------------- |
+| os                      | WSL Ubuntu 20.04.2 LTS |
+| パッケージマネージャー  | yarn                   |
+| リンター                | eslint                 |
+| コードフォーマッタ      | prettier               |
+| UI Component 管理ツール | Storybook              |
+| jsフレームワーク        | React                  |
+| Css in js               | styled-components      |
 
 ## 実行可能なスクリプト
 
