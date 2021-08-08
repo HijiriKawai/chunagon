@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { VFC } from 'react';
 import styled from 'styled-components';
 
 type ButtonProps = {
@@ -18,6 +18,7 @@ const StyledFormButton = styled.input`
   outline: none;
 `;
 
-export const FormButton: FC<ButtonProps> = ({ value }) => {
+export const FormButton: VFC<ButtonProps> = (props: ButtonProps) => {
+  const { value } = props;
   return <StyledFormButton type="button" value={value} />;
 };
