@@ -4,6 +4,8 @@ import styled from 'styled-components';
 type FormInputProps = {
   type: 'text' | 'password';
   placeholder: string;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  value: string;
 };
 
 const Wrapper = styled.div`
@@ -25,10 +27,10 @@ const UnderLine = styled.div`
 `;
 
 export const FormInput: VFC<FormInputProps> = (props: FormInputProps) => {
-  const { type, placeholder } = props;
+  const { type, placeholder, onChange, value } = props;
   return (
     <Wrapper>
-      <StyledInput type={type} placeholder={placeholder} />
+      <StyledInput type={type} placeholder={placeholder} onChange={onChange} value={value} />
       <UnderLine />
     </Wrapper>
   );

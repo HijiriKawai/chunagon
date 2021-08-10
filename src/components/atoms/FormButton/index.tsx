@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 type ButtonProps = {
   value: string;
+  onClick?: (event: React.MouseEvent<HTMLInputElement>) => void;
 };
 
 const StyledFormButton = styled.input`
@@ -19,6 +20,6 @@ const StyledFormButton = styled.input`
 `;
 
 export const FormButton: VFC<ButtonProps> = (props: ButtonProps) => {
-  const { value } = props;
-  return <StyledFormButton type="button" value={value} />;
+  const { value, onClick } = props;
+  return <StyledFormButton type="button" value={value} onClick={onClick} />;
 };
