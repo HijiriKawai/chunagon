@@ -19,6 +19,7 @@ const StyledInput = styled.input`
   outline: none;
   padding-bottom: 8px;
   box-sizing: border-box;
+  cursor: text;
 `;
 
 const UnderLine = styled.div`

@@ -17,6 +17,7 @@ const StyledFormButton = styled.input`
   background-color: #67daff;
   border: none;
   outline: none;
+  cursor: pointer;
 `;
 
 export const FormButton: VFC<ButtonProps> = (props: ButtonProps) => {

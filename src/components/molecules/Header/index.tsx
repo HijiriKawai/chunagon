@@ -45,6 +45,8 @@ const UnderLine = styled.div`
   border-top: 1px solid black;
 `;
 
+const StyledLink = styled(Link)``;
+
 export const Header: VFC = () => {
   const authUser = useAuthUser();
   const isAuthenticated = authUser != null;
@@ -61,10 +63,10 @@ export const Header: VFC = () => {
         {!isAuthenticated && (
           <NavLoginList>
             <NavListItem>
-              <Link to="/register">新規登録</Link>
+              <StyledLink to="/register">新規登録</StyledLink>
             </NavListItem>
             <NavListItem>
-              <Link to="/login">ログイン</Link>
+              <StyledLink to="/login">ログイン</StyledLink>
             </NavListItem>
           </NavLoginList>
         )}

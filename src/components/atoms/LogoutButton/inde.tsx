@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import LogoutRequest from '../../../models/LogoutRequest';
 import { useAuthUser, useLogout } from '../../context/UserAuthContext';
 
+const StyledButton = styled.button``;
+
 export const LogoutButton: VFC = () => {
   const authUser = useAuthUser();
   const logout = useLogout();
@@ -18,8 +20,8 @@ export const LogoutButton: VFC = () => {
   };
 
   return (
-    <button type="button" onClick={handleLogout}>
+    <StyledButton type="button" onClick={handleLogout}>
       ログアウト
-    </button>
+    </StyledButton>
   );
 };
