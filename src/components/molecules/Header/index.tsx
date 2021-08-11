@@ -1,6 +1,8 @@
 import React, { VFC } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { useAuthUser } from '../../context/UserAuthContext';
+import { LogoutButton } from '../../atoms/LogoutButton/inde';
 
 const StyledHeader = styled.header`
   height: 100px;
@@ -44,6 +46,9 @@ const UnderLine = styled.div`
 `;
 
 export const Header: VFC = () => {
+  const authUser = useAuthUser();
+  const isAuthenticated = authUser != null;
+
   return (
     <>
       <StyledHeader>
@@ -53,14 +58,23 @@ export const Header: VFC = () => {
             <Link to="/">Home</Link>
           </NavListItem>
         </NavList>
-        <NavLoginList>
-          <NavListItem>
-            <Link to="/register">新規登録</Link>
-          </NavListItem>
-          <NavListItem>
-            <Link to="/login">ログイン</Link>
-          </NavListItem>
-        </NavLoginList>
+        {!isAuthenticated && (
+          <NavLoginList>
+            <NavListItem>
+              <Link to="/register">新規登録</Link>
+            </NavListItem>
+            <NavListItem>
+              <Link to="/login">ログイン</Link>
+            </NavListItem>
+          </NavLoginList>
+        )}
+        {isAuthenticated && (
+          <NavLoginList>
+            <NavListItem>
+              <LogoutButton />
+            </NavListItem>
+          </NavLoginList>
+        )}
       </StyledHeader>
       <UnderLine />
     </>

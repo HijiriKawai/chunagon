@@ -18,6 +18,7 @@ const AuthOperationContext = createContext<OperationType>({
 
 export const useAuthUser = () => useContext(AuthUserContext);
 export const useLogin = () => useContext(AuthOperationContext).login;
+export const useLogout = () => useContext(AuthOperationContext).logout;
 
 export const AuthUserProvider: FC = ({ children }) => {
   const [authUser, setAuthUser] = useState<LoginResponse | null>(null);
