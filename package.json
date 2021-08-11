@@ -1,5 +1,5 @@
 {
-  "name": "sample-react-project",
+  "name": "chunagon",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -44,16 +44,14 @@
         "./tsconfig.json"
       ]
     },
-    "overrides": [
-      {
-        "files": [
-          "**/*.stories.*"
-        ],
-        "rules": {
-          "import/no-anonymous-default-export": "off"
-        }
+    "overrides": [ {
+      "files": [
+        "**/*.stories.*"
+      ],
+      "rules": {
+        "import/no-anonymous-default-export": "off"
       }
-    ]
+    } ]
   },
   "browserslist": {
     "production": [

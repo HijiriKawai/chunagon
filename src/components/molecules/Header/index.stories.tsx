@@ -11,7 +11,7 @@ export default {
 } as ComponentMeta<typeof Header>;
 
 const Template: ComponentStory<typeof Header> = () => (
-  <MemoryRouter initialEntries={['/', 'register', 'login']}>
+  <MemoryRouter initialEntries={['/', 'signup', 'login']}>
     <Header />
   </MemoryRouter>
 );

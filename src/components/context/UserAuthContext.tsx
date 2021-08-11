@@ -1,11 +1,15 @@
 import axios from 'axios';
 import React, { FC, createContext, useContext, useState } from 'react';
 import { Redirect, useHistory } from 'react-router-dom';
+import ConfirmRequest from '../../models/ConfirmRequest';
 import LoginRequest from '../../models/LoginRequest';
 import LoginResponse from '../../models/LoginResponse';
 import LogoutRequest from '../../models/LogoutRequest';
+import SignupRequest from '../../models/SignupRequest';
+import SignupResponse from '../../models/SignupResponse';
 
 const AuthUserContext = createContext<LoginResponse | null>(null);
+const SignupUserContext = createContext<SignupResponse | null>(null);
 
 type OperationType = {
   login: (req: LoginRequest) => void;
@@ -16,13 +20,64 @@ const AuthOperationContext = createContext<OperationType>({
   logout: (_) => {},
 });
 
-export const useAuthUser = () => useContext(AuthUserContext);
-export const useLogin = () => useContext(AuthOperationContext).login;
-export const useLogout = () => useContext(AuthOperationContext).logout;
+type SignupOperationType = {
+  signup: (req: SignupRequest) => void;
+  confirm: (req: ConfirmRequest) => void;
+};
+const SignupOperationContext = createContext<SignupOperationType>({
+  signup: (_) => {},
+  confirm: (_) => {},
+});
 
 export const AuthUserProvider: FC = ({ children }) => {
   const [authUser, setAuthUser] = useState<LoginResponse | null>(null);
+  const [signupUser, setSignupUser] = useState<SignupResponse | null>(null);
   const history = useHistory();
+
+  const signup = async (req: SignupRequest) => {
+    const url = 'http://localhost:8888/signup';
+    const json = JSON.stringify(req);
+
+    axios
+      .post(url, json, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((Response) => {
+        const obj: SignupResponse = {
+          token: Response.data.token,
+        };
+        setSignupUser(obj);
+      })
+      .catch((Response) => {
+        <Redirect to="/signup" />;
+      });
+  };
+
+  const confirm = async (req: ConfirmRequest) => {
+    const url = 'http://localhost:8888/signup/confirm';
+
+    const json = JSON.stringify(req);
+
+    axios
+      .post(url, json, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((Response) => {
+        const obj: LoginResponse = {
+          accessToken: Response.data.access_token,
+          refreshToken: Response.data.refresh_token,
+        };
+        setAuthUser(obj);
+        history.push('/home');
+      })
+      .catch((Response) => {
+        <Redirect to="/signup" />;
+      });
+  };
 
   const login = async (req: LoginRequest) => {
     const url = 'http://localhost:8888/login';
@@ -40,10 +95,10 @@ export const AuthUserProvider: FC = ({ children }) => {
           refreshToken: Response.data.refresh_token,
         };
         setAuthUser(obj);
-        history.push('/');
+        history.push('/home');
       })
       .catch((Response) => {
-        <Redirect to="/Login" />;
+        <Redirect to="/login" />;
       });
   };
 
@@ -61,13 +116,24 @@ export const AuthUserProvider: FC = ({ children }) => {
         history.push('/');
       })
       .catch((Response) => {
-        <Redirect to="/Login" />;
+        <Redirect to="/home" />;
       });
   };
 
   return (
     <AuthOperationContext.Provider value={{ login, logout }}>
-      <AuthUserContext.Provider value={authUser}>{children}</AuthUserContext.Provider>
+      <SignupOperationContext.Provider value={{ signup, confirm }}>
+        <AuthUserContext.Provider value={authUser}>
+          <SignupUserContext.Provider value={signupUser}>{children}</SignupUserContext.Provider>
+        </AuthUserContext.Provider>
+      </SignupOperationContext.Provider>
     </AuthOperationContext.Provider>
   );
 };
+
+export const useAuthUser = () => useContext(AuthUserContext);
+export const useSignupUser = () => useContext(SignupUserContext);
+export const useLogin = () => useContext(AuthOperationContext).login;
+export const useLogout = () => useContext(AuthOperationContext).logout;
+export const useSignup = () => useContext(SignupOperationContext).signup;
+export const useConfirm = () => useContext(SignupOperationContext).confirm;

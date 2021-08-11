@@ -63,7 +63,7 @@ export const Header: VFC = () => {
         {!isAuthenticated && (
           <NavLoginList>
             <NavListItem>
-              <StyledLink to="/register">新規登録</StyledLink>
+              <StyledLink to="/signup">新規登録</StyledLink>
             </NavListItem>
             <NavListItem>
               <StyledLink to="/login">ログイン</StyledLink>

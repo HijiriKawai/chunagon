@@ -1,11 +1,12 @@
 import React from 'react';
 import { BrowserRouter, Redirect, Route, RouteProps, Switch } from 'react-router-dom';
-import { AuthUserProvider, useAuthUser } from './components/context/UserAuthContext';
+import { AuthUserProvider, useAuthUser, useSignupUser } from './components/context/UserAuthContext';
 import { Footer } from './components/molecules/Footer';
 import { Header } from './components/molecules/Header';
 import { Top } from './components/pages/Top';
 import { Login } from './components/pages/Login';
 import { Home } from './components/pages/Home';
+import { Signup } from './components/pages/Signup';
 
 const UnAuthRoute: React.FC<RouteProps> = ({ ...props }) => {
   const authUser = useAuthUser();
@@ -34,6 +35,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={Top} />
           <UnAuthRoute exact path="/login" component={Login} />
+          <UnAuthRoute exact path="/signup" component={Signup} />
           <PrivateRoute exact path="/home" component={Home} />
           <Redirect to="/" />
         </Switch>
