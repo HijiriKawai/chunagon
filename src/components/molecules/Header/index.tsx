@@ -57,7 +57,7 @@ export const Header: VFC = () => {
         <Headline>Chunagon</Headline>
         <NavList>
           <NavListItem>
-            <Link to="/">Home</Link>
+            <Link to="/home">Home</Link>
           </NavListItem>
         </NavList>
         {!isAuthenticated && (

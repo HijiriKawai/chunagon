@@ -50,7 +50,7 @@ export const AuthUserProvider: FC = ({ children }) => {
         };
         setSignupUser(obj);
       })
-      .catch((Response) => {
+      .catch((Error) => {
         <Redirect to="/signup" />;
       });
   };
