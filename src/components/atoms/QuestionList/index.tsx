@@ -5,8 +5,7 @@ import QuestionsResponse from '../../../models/QuestionResponse';
 import { Questions } from '../Questions';
 
 export const QuestionList: VFC = () => {
-  const x: QuestionsResponse = [];
-  const [questions, setQuestions] = useState<QuestionsResponse>(x);
+  const [questions, setQuestions] = useState<QuestionsResponse>([]);
   const authUser = useAuthUser();
   const token = authUser?.accessToken;
   const url = 'http://localhost:8888/question';
@@ -22,7 +21,7 @@ export const QuestionList: VFC = () => {
       })
       .catch((Error) => {});
   }, [token]);
-  const isListed = questions != null;
+  const isListed = questions.length !== 0;
 
   return (
     <>
