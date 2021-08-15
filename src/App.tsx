@@ -7,6 +7,7 @@ import { Top } from './components/pages/Top';
 import { Login } from './components/pages/Login';
 import { Home } from './components/pages/Home';
 import { Signup } from './components/pages/Signup';
+import { Question } from './components/pages/Question';
 
 const UnAuthRoute: React.FC<RouteProps> = ({ ...props }) => {
   const authUser = useAuthUser();
@@ -37,6 +38,7 @@ function App() {
           <UnAuthRoute exact path="/login" component={Login} />
           <UnAuthRoute exact path="/signup" component={Signup} />
           <PrivateRoute exact path="/home" component={Home} />
+          <PrivateRoute exact path="/question/:questionID" component={Question} />
           <Redirect to="/" />
         </Switch>
         <Footer />

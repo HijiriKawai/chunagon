@@ -2,7 +2,7 @@ import React, { useEffect, useState, VFC } from 'react';
 import axios from 'axios';
 import { useAuthUser } from '../../context/UserAuthContext';
 import QuestionsResponse from '../../../models/QuestionResponse';
-import { Questions } from '../Questions';
+import { Questions } from '../../atoms/Questions';
 
 export const QuestionList: VFC = () => {
   const [questions, setQuestions] = useState<QuestionsResponse>([]);

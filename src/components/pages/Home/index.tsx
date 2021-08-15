@@ -1,5 +1,5 @@
 import React, { VFC } from 'react';
-import { QuestionList } from '../../atoms/QuestionList';
+import { QuestionList } from '../../molecules/QuestionList';
 
 export const Home: VFC = () => {
   return (
