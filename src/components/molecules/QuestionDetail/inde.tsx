@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useAuthUser } from '../../context/UserAuthContext';
 import QuestionDtailResponse from '../../../models/QuestionDtailResponse';
+import { QuestionAnswer } from '../QuestionAnswer';
 
 type RouterParams = {
   questionID: string;
@@ -39,7 +40,7 @@ export const QuestionDetail: VFC = () => {
   return (
     <>
       {isEmpty && <p>取得に失敗しました。</p>}
-      {!isEmpty && <p>{question.title}</p>}
+      {!isEmpty && <QuestionAnswer />}
     </>
   );
 };
