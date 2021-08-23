@@ -46,6 +46,7 @@ export const QuestionAnswer: VFC<QuestionAnswerProps> = (props: QuestionAnswerPr
         .post(url, JSON.stringify(post), {
           headers: {
             Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
           },
         })
         .then((Response) => {})
