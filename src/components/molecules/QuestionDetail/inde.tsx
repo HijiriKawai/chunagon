@@ -40,7 +40,7 @@ export const QuestionDetail: VFC = () => {
   return (
     <>
       {isEmpty && <p>取得に失敗しました。</p>}
-      {!isEmpty && <QuestionAnswer />}
+      {!isEmpty && <QuestionAnswer question={question} />}
     </>
   );
 };

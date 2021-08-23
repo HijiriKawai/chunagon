@@ -2,7 +2,7 @@ import React, { VFC } from 'react';
 import styled from 'styled-components';
 
 type ButtonProps = {
-  code: string;
+  onClick: React.MouseEventHandler<HTMLInputElement>;
 };
 
 const StyledExecuteButton = styled.input`
@@ -20,14 +20,7 @@ const StyledExecuteButton = styled.input`
 `;
 
 export const ExecuteButton: VFC<ButtonProps> = (props: ButtonProps) => {
-  const { code } = props;
-  const onClick = () => {
-    const args = '1, 2';
-    // eslint-disable-next-line no-eval
-    const x = eval(code);
-    // eslint-disable-next-line no-console
-    console.log(x);
-  };
+  const { onClick } = props;
 
   return <StyledExecuteButton type="button" value="実行" onClick={onClick} />;
 };
