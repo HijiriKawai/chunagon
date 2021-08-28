@@ -1,4 +1,4 @@
-import React, { VFC } from 'react';
+import { VFC } from 'react';
 import { useSignupUser } from '../../context/UserAuthContext';
 import { ConfirmForm } from '../../molecules/ConfirmForm';
 import { SignupForm } from '../../molecules/SignupForm';

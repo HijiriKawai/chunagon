@@ -1,4 +1,4 @@
-import React, { VFC } from 'react';
+import { VFC } from 'react';
 import styled from 'styled-components';
 import LogoutRequest from '../../../models/LogoutRequest';
 import { useAuthUser, useLogout } from '../../context/UserAuthContext';

@@ -1,4 +1,4 @@
-import React, { VFC } from 'react';
+import { VFC } from 'react';
 import { Link } from 'react-router-dom';
 import QuestionsResponse from '../../../models/QuestionResponse';
 

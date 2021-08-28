@@ -1,4 +1,4 @@
-import React, { useEffect, useState, VFC } from 'react';
+import { useEffect, useState, VFC } from 'react';
 import axios from 'axios';
 import { useAuthUser } from '../../context/UserAuthContext';
 import QuestionsResponse from '../../../models/QuestionResponse';

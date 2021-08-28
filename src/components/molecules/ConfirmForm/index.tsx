@@ -1,4 +1,4 @@
-import React, { useState, VFC } from 'react';
+import { useState, VFC } from 'react';
 import styled from 'styled-components';
 import ConfirmRequest from '../../../models/ConfirmRequest';
 import { FormButton } from '../../atoms/FormButton';

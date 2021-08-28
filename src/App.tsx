@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter, Redirect, Route, RouteProps, Switch } from 'react-router-dom';
 import { AuthUserProvider, useAuthUser } from './components/context/UserAuthContext';
 import { Footer } from './components/molecules/Footer';

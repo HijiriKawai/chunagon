@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState, VFC } from 'react';
+import { useEffect, useState, VFC } from 'react';
 import AnswerRequest from '../../../models/AnswerRequest';
 import QuestionDtailResponse from '../../../models/QuestionDtailResponse';
 import { Editor } from '../../atoms/Editor';

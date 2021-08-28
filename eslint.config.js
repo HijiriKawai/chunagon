@@ -42,6 +42,7 @@ module.exports = {
     {
       files: ['**/*.tsx', '**/*.ts'],
       rules: {
+        'react/react-in-jsx-scope': 'off',
         'react/require-default-props': 'off',
         'react/prop-types': 'off', // we should use types
         'react/forbid-prop-types': 'off', // we should use types

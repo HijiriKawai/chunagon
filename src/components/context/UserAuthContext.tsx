@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { FC, createContext, useContext, useState } from 'react';
+import { FC, createContext, useContext, useState } from 'react';
 import { Redirect, useHistory } from 'react-router-dom';
 import ConfirmRequest from '../../models/ConfirmRequest';
 import LoginRequest from '../../models/LoginRequest';

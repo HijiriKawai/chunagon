@@ -1,4 +1,4 @@
-import React, { VFC } from 'react';
+import { VFC } from 'react';
 import AceEditor from 'react-ace';
 
 import 'ace-builds/src-noconflict/mode-javascript';
