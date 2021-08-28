@@ -1,5 +1,4 @@
 import React, { VFC } from 'react';
-import { render } from 'react-dom';
 import AceEditor from 'react-ace';
 
 import 'ace-builds/src-noconflict/mode-javascript';

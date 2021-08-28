@@ -13,7 +13,7 @@ export const LoginForm: VFC = () => {
 
   const login = useLogin();
 
-  const handleLogin = (event: React.MouseEvent<HTMLInputElement>) => {
+  const handleLogin = () => {
     const req: LoginRequest = {
       grant_type: 'password',
       username: userName,

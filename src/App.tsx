@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Redirect, Route, RouteProps, Switch } from 'react-router-dom';
-import { AuthUserProvider, useAuthUser, useSignupUser } from './components/context/UserAuthContext';
+import { AuthUserProvider, useAuthUser } from './components/context/UserAuthContext';
 import { Footer } from './components/molecules/Footer';
 import { Header } from './components/molecules/Header';
 import { Top } from './components/pages/Top';

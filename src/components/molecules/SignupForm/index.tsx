@@ -13,7 +13,7 @@ export const SignupForm: VFC = () => {
 
   const signup = useSignup();
 
-  const handleSignup = (event: React.MouseEvent<HTMLInputElement>) => {
+  const handleSignup = () => {
     const req: SignupRequest = {
       email,
       password,
