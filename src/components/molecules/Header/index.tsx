@@ -2,7 +2,7 @@ import { VFC } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useAuthUser } from '../../context/UserAuthContext';
-import { LogoutButton } from '../../atoms/LogoutButton/inde';
+import { LogoutButton } from '../../atoms/LogoutButton';
 
 const StyledHeader = styled.header`
   height: 100px;

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 type FormInputProps = {
   type: 'text' | 'password';
   placeholder: string;
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   value: string;
 };
 

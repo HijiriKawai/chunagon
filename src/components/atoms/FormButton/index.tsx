@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 type ButtonProps = {
   value: string;
-  onClick?: (event: React.MouseEvent<HTMLInputElement>) => void;
+  onClick: (event: React.MouseEvent<HTMLInputElement>) => void;
 };
 
 const StyledFormButton = styled.input`
