@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 const StyledFooter = styled.footer`
+  position: absolute;
+  bottom: 0;
   width: 100%;
   height: 100px;
   background-color: #efefef;
