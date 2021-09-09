@@ -3,7 +3,7 @@ import { useEffect, useState, VFC } from 'react';
 import AnswerRequest from '../../../models/AnswerRequest';
 import QuestionDtailResponse from '../../../models/QuestionDtailResponse';
 import { Editor } from '../../atoms/Editor';
-import { ExecuteButton } from '../../atoms/ExecuteButton';
+import { Button } from '../../atoms/Button';
 import { useAuthUser } from '../../context/UserAuthContext';
 
 type QuestionAnswerProps = {
@@ -59,7 +59,7 @@ export const QuestionAnswer: VFC<QuestionAnswerProps> = (props: QuestionAnswerPr
       <h1>{question.title}</h1>
       <h2>{question.description}</h2>
       <Editor theme="solarized_dark" fontsize={14} value={code} onChange={setCode} />
-      <ExecuteButton onClick={onClick} />
+      <Button value="実行" onClick={onClick} />
       <p>{result}</p>
     </>
   );

@@ -1,7 +1,7 @@
 import { useState, VFC } from 'react';
 import styled from 'styled-components';
 import ConfirmRequest from '../../../models/ConfirmRequest';
-import { FormButton } from '../../atoms/FormButton';
+import { Button } from '../../atoms/Button';
 import { FormInput } from '../../atoms/FormInput';
 import { useConfirm, useSignupUser } from '../../context/UserAuthContext';
 
@@ -32,7 +32,7 @@ export const ConfirmForm: VFC = () => {
           onChange={(e) => setNumber(e.target.value)}
           value={number}
         />
-        <FormButton value="Confirm" onClick={handlesignup} />
+        <Button value="Confirm" onClick={handlesignup} />
       </form>
     </StyledDiv>
   );

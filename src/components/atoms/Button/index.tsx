@@ -6,7 +6,7 @@ type ButtonProps = {
   onClick: (event: React.MouseEvent<HTMLInputElement>) => void;
 };
 
-const StyledFormButton = styled.input`
+const StyledButton = styled.input`
   font-size: 0.875rem;
   color: white;
   height: 36px;
@@ -20,7 +20,7 @@ const StyledFormButton = styled.input`
   cursor: pointer;
 `;
 
-export const FormButton: VFC<ButtonProps> = (props: ButtonProps) => {
+export const Button: VFC<ButtonProps> = (props: ButtonProps) => {
   const { value, onClick } = props;
-  return <StyledFormButton type="button" value={value} onClick={onClick} />;
+  return <StyledButton type="button" value={value} onClick={onClick} />;
 };

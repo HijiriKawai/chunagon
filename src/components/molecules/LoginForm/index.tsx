@@ -1,7 +1,7 @@
 import { useState, VFC } from 'react';
 import styled from 'styled-components';
 import LoginRequest from '../../../models/LoginRequest';
-import { FormButton } from '../../atoms/FormButton';
+import { Button } from '../../atoms/Button';
 import { FormInput } from '../../atoms/FormInput';
 import { useLogin } from '../../context/UserAuthContext';
 
@@ -37,7 +37,7 @@ export const LoginForm: VFC = () => {
           onChange={(e) => setPassword(e.target.value)}
           value={password}
         />
-        <FormButton value="Login" onClick={handleLogin} />
+        <Button value="Login" onClick={handleLogin} />
       </form>
     </StyledDiv>
   );

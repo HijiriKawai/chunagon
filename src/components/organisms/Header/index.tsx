@@ -1,8 +1,9 @@
 import { VFC } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { useAuthUser } from '../../context/UserAuthContext';
-import { LogoutButton } from '../../atoms/LogoutButton';
+import { useAuthUser, useLogout } from '../../context/UserAuthContext';
+import { Button } from '../../atoms/Button';
+import LogoutRequest from '../../../models/LogoutRequest';
 
 const StyledHeader = styled.header`
   height: 100px;
@@ -50,6 +51,17 @@ const StyledLink = styled(Link)``;
 export const Header: VFC = () => {
   const authUser = useAuthUser();
   const isAuthenticated = authUser != null;
+  const logout = useLogout();
+
+  const handleLogout = () => {
+    if (authUser) {
+      const req: LogoutRequest = {
+        grant_type: 'refresh_token',
+        refresh_token: authUser.refreshToken,
+      };
+      logout(req);
+    }
+  };
 
   return (
     <>
@@ -73,7 +85,7 @@ export const Header: VFC = () => {
         {isAuthenticated && (
           <NavLoginList>
             <NavListItem>
-              <LogoutButton />
+              <Button value="ログアウト" onClick={handleLogout} />
             </NavListItem>
           </NavLoginList>
         )}
