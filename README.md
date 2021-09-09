@@ -22,3 +22,7 @@ front end app
 | lint      | linterを実行                               |
 | fix       | lintで出たエラーを自動修正                 |
 | storybook | <http://localhost:6006> でstorybookを起動  |
+
+## 作成上での注意点
+
+- 外部APIとの通信はpagesディレクトリ内のコンポーネントで行うこと
