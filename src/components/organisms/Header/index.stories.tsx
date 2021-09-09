@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { Header } from './index';
 
 export default {
-  title: 'Example/molecules/Header',
+  title: 'Example/organisms/Header',
   component: Header,
   argTypes: {},
 } as ComponentMeta<typeof Header>;
