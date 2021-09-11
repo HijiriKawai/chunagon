@@ -32,6 +32,11 @@ const Wrapper = styled.div`
   min-height: 100vh;
   position: relative;
   padding-bottom: 100px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+  font-size: 16px;
+  color: #333;
+  letter-spacing: 1.5px;
+  line-height: 1.75;
 `;
 
 function App() {
