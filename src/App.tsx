@@ -35,6 +35,7 @@ const Wrapper = styled.div`
   font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
   font-size: 16px;
   color: #333;
+  background-color: #f6f6f4;
   letter-spacing: 1.5px;
   line-height: 1.75;
 `;
