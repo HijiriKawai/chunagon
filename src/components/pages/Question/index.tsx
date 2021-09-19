@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useEffect, useState, VFC } from 'react';
 import { useParams } from 'react-router-dom';
 import QuestionDtailResponse from '../../../models/QuestionDtailResponse';
+import CommunicationStatus from '../../../utils/CommunicationStatusType';
 import { useAuthUser } from '../../context/UserAuthContext';
 import { QuestionDetail } from '../../organisms/QuestionDetail';
 
@@ -18,6 +19,7 @@ export const Question: VFC = () => {
     assertions: [],
     answeredCorrectly: false,
   });
+  const [status, setStatus] = useState<CommunicationStatus>('Loading');
   const { questionID } = useParams<RouterParams>();
   const authUser = useAuthUser();
   const token = authUser?.accessToken;
@@ -31,15 +33,16 @@ export const Question: VFC = () => {
       })
       .then((Response) => {
         setQuestion(Response.data);
+        setStatus('OK');
       })
-      .catch((Error) => {});
+      .catch(() => {
+        setStatus('Faild');
+      });
   }, [token, url]);
-
-  const isEmpty = question.questionID === '';
 
   return (
     <>
-      <QuestionDetail isEmpty={isEmpty} question={question} />
+      <QuestionDetail status={status} question={question} />
     </>
   );
 };

@@ -1,11 +1,13 @@
 import axios from 'axios';
 import { useEffect, useState, VFC } from 'react';
 import QuestionsResponse from '../../../models/QuestionResponse';
+import CommunicationStatus from '../../../utils/CommunicationStatusType';
 import { useAuthUser } from '../../context/UserAuthContext';
 import { QuestionList } from '../../organisms/QuestionList';
 
 export const Home: VFC = () => {
   const [questions, setQuestions] = useState<QuestionsResponse>([]);
+  const [status, setStatus] = useState<CommunicationStatus>('Loading');
   const authUser = useAuthUser();
   const token = authUser?.accessToken;
   const url = 'http://localhost:8888/question';
@@ -18,15 +20,17 @@ export const Home: VFC = () => {
       })
       .then((Response) => {
         setQuestions(Response.data);
+        setStatus('OK');
       })
-      .catch((Error) => {});
+      .catch(() => {
+        setStatus('Faild');
+      });
   }, [token]);
-  const isListed = questions.length !== 0;
 
   return (
     <>
       <h1>home</h1>
-      <QuestionList isListed={isListed} questions={questions} />
+      <QuestionList status={status} questions={questions} />
     </>
   );
 };

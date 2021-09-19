@@ -12,7 +12,7 @@ const Template: ComponentStory<typeof QuestionDetail> = (args) => <QuestionDetai
 
 export const Default = Template.bind({});
 Default.args = {
-  isEmpty: false,
+  status: 'OK',
   question: {
     questionID: '2f644942-e039-4a1c-aab2-bfb8d67d5ff9',
     title: 'add 2 value',
@@ -56,7 +56,7 @@ Default.args = {
 
 export const Faild = Template.bind({});
 Faild.args = {
-  isEmpty: true,
+  status: 'Faild',
   question: {
     questionID: '',
     title: '',

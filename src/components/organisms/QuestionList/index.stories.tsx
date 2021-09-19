@@ -17,7 +17,7 @@ const Template: ComponentStory<typeof QuestionList> = (args) => (
 
 export const Default = Template.bind({});
 Default.args = {
-  isListed: true,
+  status: 'OK',
   questions: [
     {
       questionID: '1',
@@ -34,6 +34,6 @@ Default.args = {
 
 export const Faild = Template.bind({});
 Faild.args = {
-  isListed: false,
+  status: 'Faild',
   questions: [],
 };
