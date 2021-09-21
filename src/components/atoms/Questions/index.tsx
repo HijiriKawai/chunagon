@@ -59,8 +59,10 @@ export const Questions: VFC<QuestionsProps> = (props: QuestionsProps) => {
   return (
     <StyledTable>
       <thead>
-        <StyledTh>問題名</StyledTh>
-        <StyledTh>回答</StyledTh>
+        <tr>
+          <StyledTh>問題名</StyledTh>
+          <StyledTh>回答</StyledTh>
+        </tr>
       </thead>
       <tbody>{items}</tbody>
     </StyledTable>
