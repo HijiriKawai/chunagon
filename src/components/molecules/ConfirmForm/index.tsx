@@ -13,7 +13,7 @@ export const ConfirmForm: VFC = () => {
 
   const confirm = useConfirm();
 
-  const handlesignup = (event: React.MouseEvent<HTMLInputElement>) => {
+  const handlesignup = () => {
     if (signupUser) {
       const req: ConfirmRequest = {
         token: signupUser.token,
