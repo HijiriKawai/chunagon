@@ -1,10 +1,10 @@
 import { VFC } from 'react';
-import styled from 'styled-components';
-
-const StyledP = styled.p`
-  color: #711d26;
-`;
+import { Typography } from '@mui/material';
 
 export const Faild: VFC = () => {
-  return <StyledP>取得に失敗しました</StyledP>;
+  return (
+    <Typography align="center" color="error">
+      取得に失敗しました
+    </Typography>
+  );
 };
