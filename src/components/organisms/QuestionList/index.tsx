@@ -4,6 +4,7 @@ import { Questions } from '../../atoms/Questions';
 import { Faild } from '../../atoms/Faild';
 import { Error } from '../../atoms/Error';
 import CommunicationStatus from '../../../utils/CommunicationStatusType';
+import { Loading } from '../../atoms/Loading';
 
 type QuestionListProps = {
   status: CommunicationStatus;
@@ -15,7 +16,7 @@ export const QuestionList: VFC<QuestionListProps> = (props: QuestionListProps) =
   const questionDetail = {
     OK: Questions,
     Faild,
-    Loading: Faild,
+    Loading,
   };
 
   const Component = questionDetail[status];

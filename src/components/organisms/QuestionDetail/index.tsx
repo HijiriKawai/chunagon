@@ -4,6 +4,7 @@ import { QuestionAnswer } from '../../molecules/QuestionAnswer';
 import { Faild } from '../../atoms/Faild';
 import { Error } from '../../atoms/Error';
 import CommunicationStatus from '../../../utils/CommunicationStatusType';
+import { Loading } from '../../atoms/Loading';
 
 type QuestionDetailProps = {
   status: CommunicationStatus;
@@ -15,7 +16,7 @@ export const QuestionDetail: VFC<QuestionDetailProps> = (props: QuestionDetailPr
   const questionDetail = {
     OK: QuestionAnswer,
     Faild,
-    Loading: Faild,
+    Loading,
   };
 
   const Component = questionDetail[status];
