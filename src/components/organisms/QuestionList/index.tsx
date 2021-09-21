@@ -12,16 +12,13 @@ type QuestionListProps = {
 
 export const QuestionList: VFC<QuestionListProps> = (props: QuestionListProps) => {
   const { status, questions } = props;
+  const questionDetail = {
+    OK: Questions,
+    Faild,
+    Loading: Faild,
+  };
 
-  if (status === 'OK') {
-    return <Questions questions={questions} />;
-  }
-  if (status === 'Faild') {
-    return <Faild />;
-  }
-  if (status === 'Loading') {
-    return <Faild />;
-  }
+  const Component = questionDetail[status];
 
-  return <Error />;
+  return <Component questions={questions} />;
 };

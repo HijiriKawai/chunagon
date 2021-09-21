@@ -12,16 +12,13 @@ type QuestionDetailProps = {
 
 export const QuestionDetail: VFC<QuestionDetailProps> = (props: QuestionDetailProps) => {
   const { status, question } = props;
+  const questionDetail = {
+    OK: QuestionAnswer,
+    Faild,
+    Loading: Faild,
+  };
 
-  if (status === 'OK') {
-    return <QuestionAnswer question={question} />;
-  }
-  if (status === 'Faild') {
-    return <Faild />;
-  }
-  if (status === 'Loading') {
-    return <Faild />;
-  }
+  const Component = questionDetail[status];
 
-  return <Error />;
+  return <Component question={question} />;
 };
