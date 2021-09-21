@@ -27,13 +27,15 @@ export const LoginForm: VFC = () => {
       <form>
         <FormInput
           type="text"
-          placeholder="UserName"
+          placeholder="Sample@sample.com"
+          label="UserName"
           onChange={(e) => setUserName(e.target.value)}
           value={userName}
         />
         <FormInput
           type="password"
           placeholder="Password"
+          label="Password"
           onChange={(e) => setPassword(e.target.value)}
           value={password}
         />

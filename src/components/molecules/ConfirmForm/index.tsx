@@ -27,8 +27,9 @@ export const ConfirmForm: VFC = () => {
     <StyledDiv>
       <form>
         <FormInput
-          type="text"
+          type="number"
           placeholder="1234"
+          label="Number"
           onChange={(e) => setNumber(e.target.value)}
           value={number}
         />

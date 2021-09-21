@@ -27,12 +27,14 @@ export const SignupForm: VFC = () => {
         <FormInput
           type="text"
           placeholder="Sample@sample.com"
+          label="Email"
           onChange={(e) => setEmail(e.target.value)}
           value={email}
         />
         <FormInput
           type="password"
           placeholder="Password"
+          label="Password"
           onChange={(e) => setPassword(e.target.value)}
           value={password}
         />
