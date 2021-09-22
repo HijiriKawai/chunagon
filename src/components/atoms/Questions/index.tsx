@@ -1,6 +1,8 @@
 import { VFC } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
+import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import QuestionsResponse from '../../../models/QuestionResponse';
 
 type QuestionsProps = {
@@ -50,8 +52,8 @@ export const Questions: VFC<QuestionsProps> = (props: QuestionsProps) => {
           <StyledLink to={`question/${question.questionID}`}>{question.title}</StyledLink>
         </StyledTd>
         <StyledTd>
-          {question.answeredCorrectly && <StyledP>済</StyledP>}
-          {!question.answeredCorrectly && <StyledP>未</StyledP>}
+          {question.answeredCorrectly && <CheckBoxIcon />}
+          {!question.answeredCorrectly && <CheckBoxOutlineBlankIcon />}
         </StyledTd>
       </StyledTr>
     );
