@@ -6,6 +6,10 @@ import { useAuthUser, useLogout } from '../../../context/UserAuthContext';
 import { Button } from '../../atoms/Button';
 import LogoutRequest from '../../../models/LogoutRequest';
 
+const StyledHeader = styled.header`
+  background-color: white;
+`;
+
 const UnderLine = styled.div`
   position: relative;
   border-top: 1px solid black;
@@ -38,11 +42,11 @@ export const Header: VFC = () => {
 
   return (
     <>
-      <header>
+      <StyledHeader>
         <Stack
           direction="row"
           justifyContent="space-between"
-          alignItems="baseline"
+          alignItems="center"
           sx={{
             paddingLeft: 4,
             paddingRight: 4,
@@ -50,14 +54,14 @@ export const Header: VFC = () => {
         >
           <Typography variant="h3">chunagon</Typography>
           {!isAuthenticated && (
-            <Stack direction="row" justifyContent="center" alignItems="baseline" spacing={2}>
+            <Stack direction="row" justifyContent="center" alignItems="center" spacing={2}>
               <StyledLink to="/signup">新規登録</StyledLink>
               <StyledLink to="/login">ログイン</StyledLink>
             </Stack>
           )}
           {isAuthenticated && <Button value="ログアウト" onClick={handleLogout} />}
         </Stack>
-      </header>
+      </StyledHeader>
       <UnderLine />
     </>
   );
