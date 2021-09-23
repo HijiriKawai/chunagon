@@ -40,8 +40,6 @@ const StyledLink = styled(Link)`
   }
 `;
 
-const StyledP = styled.p``;
-
 export const Questions: VFC<QuestionsProps> = (props: QuestionsProps) => {
   const { questions } = props;
   const items = questions.map((question) => {
