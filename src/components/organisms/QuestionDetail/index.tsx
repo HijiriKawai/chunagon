@@ -2,7 +2,6 @@ import { VFC } from 'react';
 import QuestionDtailResponse from '../../../models/QuestionDtailResponse';
 import { QuestionAnswer } from '../../molecules/QuestionAnswer';
 import { Faild } from '../../atoms/Faild';
-import { Error } from '../../atoms/Error';
 import CommunicationStatus from '../../../utils/CommunicationStatusType';
 import { Loading } from '../../atoms/Loading';
 
