@@ -34,7 +34,9 @@ export const SignupForm: VFC = () => {
           alignItems: 'center',
         }}
       >
-        <Typography variant="h5">Signup</Typography>
+        <Typography variant="h5" sx={{ marginTop: 8 }}>
+          Signup
+        </Typography>
         <FormInput
           type="text"
           placeholder="Sample@sample.com"

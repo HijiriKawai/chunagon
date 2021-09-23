@@ -36,7 +36,9 @@ export const ConfirmForm: VFC = () => {
           alignItems: 'center',
         }}
       >
-        <Typography variant="h5">メールに届いた番号を入力</Typography>
+        <Typography variant="h5" sx={{ marginTop: 8 }}>
+          メールに届いた番号を入力
+        </Typography>
         <FormInput
           type="number"
           placeholder="1234"
