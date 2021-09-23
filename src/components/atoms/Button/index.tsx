@@ -1,15 +1,22 @@
 import { MouseEventHandler, VFC } from 'react';
-import { Button as MUIButton } from '@mui/material';
+import { Button as MUIButton, Theme } from '@mui/material';
+import { SxProps } from '@mui/system';
 
 type ButtonProps = {
   value: string;
   onClick: MouseEventHandler<HTMLButtonElement>;
+  sx?: SxProps<Theme>;
 };
 
 export const Button: VFC<ButtonProps> = (props: ButtonProps) => {
-  const { value, onClick } = props;
+  const { value, onClick, sx } = props;
+  const style: SxProps<Theme> = {
+    ...sx,
+    borderRadius: 25,
+  };
+
   return (
-    <MUIButton onClick={onClick} variant="contained" size="large" sx={{ borderRadius: 25 }}>
+    <MUIButton onClick={onClick} variant="contained" size="large" sx={style}>
       {value}
     </MUIButton>
   );
