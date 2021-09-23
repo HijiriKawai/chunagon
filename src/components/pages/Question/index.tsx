@@ -40,9 +40,5 @@ export const Question: VFC = () => {
       });
   }, [token, url]);
 
-  return (
-    <>
-      <QuestionDetail status={status} question={question} />
-    </>
-  );
+  return <QuestionDetail status={status} question={question} />;
 };

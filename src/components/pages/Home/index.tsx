@@ -27,10 +27,5 @@ export const Home: VFC = () => {
       });
   }, [token]);
 
-  return (
-    <>
-      <h1>home</h1>
-      <QuestionList status={status} questions={questions} />
-    </>
-  );
+  return <QuestionList status={status} questions={questions} />;
 };
