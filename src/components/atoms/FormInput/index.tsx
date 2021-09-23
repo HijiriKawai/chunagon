@@ -7,10 +7,11 @@ type FormInputProps = {
   label: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   value: string;
+  margin?: 'normal' | 'none' | 'dense';
 };
 
 export const FormInput: VFC<FormInputProps> = (props: FormInputProps) => {
-  const { type, placeholder, label, onChange, value } = props;
+  const { type, placeholder, label, onChange, value, margin } = props;
   return (
     <TextField
       type={type}
@@ -18,6 +19,7 @@ export const FormInput: VFC<FormInputProps> = (props: FormInputProps) => {
       label={label}
       onChange={onChange}
       value={value}
+      margin={margin}
       required
     />
   );

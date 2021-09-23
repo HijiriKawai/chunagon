@@ -1,3 +1,4 @@
+import { Box, Typography } from '@mui/material';
 import { useState, VFC } from 'react';
 import styled from 'styled-components';
 import LoginRequest from '../../../models/LoginRequest';
@@ -5,7 +6,10 @@ import { Button } from '../../atoms/Button';
 import { FormInput } from '../../atoms/FormInput';
 import { useLogin } from '../../context/UserAuthContext';
 
-const StyledDiv = styled.div``;
+const StyledButton = styled(Button)`
+  margin-top: 3px;
+  margin-bottom: 2px;
+`;
 
 export const LoginForm: VFC = () => {
   const [userName, setUserName] = useState('');
@@ -23,14 +27,27 @@ export const LoginForm: VFC = () => {
   };
 
   return (
-    <StyledDiv>
-      <form>
+    <Box
+      sx={{
+        marginTop: 8,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+      }}
+    >
+      <Typography variant="h5">Login</Typography>
+      <Box
+        component="form"
+        noValidate
+        sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 1 }}
+      >
         <FormInput
           type="text"
           placeholder="Sample@sample.com"
           label="UserName"
           onChange={(e) => setUserName(e.target.value)}
           value={userName}
+          margin="normal"
         />
         <FormInput
           type="password"
@@ -38,9 +55,10 @@ export const LoginForm: VFC = () => {
           label="Password"
           onChange={(e) => setPassword(e.target.value)}
           value={password}
+          margin="normal"
         />
-        <Button value="Login" onClick={handleLogin} />
-      </form>
-    </StyledDiv>
+        <StyledButton value="Login" onClick={handleLogin} />
+      </Box>
+    </Box>
   );
 };

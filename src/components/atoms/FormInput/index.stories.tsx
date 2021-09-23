@@ -15,4 +15,5 @@ Default.args = {
   type: 'text',
   placeholder: 'FormInput',
   label: 'default',
+  value: 'default',
 };
