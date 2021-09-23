@@ -1,6 +1,6 @@
 import { BrowserRouter, Redirect, Route, RouteProps, Switch } from 'react-router-dom';
 import styled from 'styled-components';
-import { AuthUserProvider, useAuthUser } from './components/context/UserAuthContext';
+import { AuthUserProvider, useAuthUser } from './context/UserAuthContext';
 import { Footer } from './components/organisms/Footer';
 import { Header } from './components/organisms/Header';
 import { Top } from './components/pages/Top';

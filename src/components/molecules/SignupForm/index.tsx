@@ -4,7 +4,7 @@ import { useState, VFC } from 'react';
 import SignupRequest from '../../../models/SignupRequest';
 import { Button } from '../../atoms/Button';
 import { FormInput } from '../../atoms/FormInput';
-import { useSignup } from '../../context/UserAuthContext';
+import { useSignup } from '../../../context/UserAuthContext';
 
 const buttonStyle: SxProps<Theme> = {
   marginBottom: 8,

@@ -2,7 +2,7 @@ import { VFC } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { Stack, Typography } from '@mui/material';
-import { useAuthUser, useLogout } from '../../context/UserAuthContext';
+import { useAuthUser, useLogout } from '../../../context/UserAuthContext';
 import { Button } from '../../atoms/Button';
 import LogoutRequest from '../../../models/LogoutRequest';
 
