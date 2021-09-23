@@ -2,7 +2,7 @@ import axios from 'axios';
 import { useEffect, useState, VFC } from 'react';
 import QuestionsResponse from '../../../models/QuestionResponse';
 import CommunicationStatus from '../../../utils/CommunicationStatusType';
-import { useAuthUser } from '../../context/UserAuthContext';
+import { useAuthUser } from '../../../context/UserAuthContext';
 import { QuestionList } from '../../organisms/QuestionList';
 
 export const Home: VFC = () => {

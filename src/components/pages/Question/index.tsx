@@ -3,7 +3,7 @@ import { useEffect, useState, VFC } from 'react';
 import { useParams } from 'react-router-dom';
 import QuestionDtailResponse from '../../../models/QuestionDtailResponse';
 import CommunicationStatus from '../../../utils/CommunicationStatusType';
-import { useAuthUser } from '../../context/UserAuthContext';
+import { useAuthUser } from '../../../context/UserAuthContext';
 import { QuestionDetail } from '../../organisms/QuestionDetail';
 
 type RouterParams = {
