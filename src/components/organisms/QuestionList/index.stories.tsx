@@ -37,3 +37,9 @@ Faild.args = {
   status: 'Faild',
   questions: [],
 };
+
+export const Loading = Template.bind({});
+Loading.args = {
+  status: 'Loading',
+  questions: [],
+};

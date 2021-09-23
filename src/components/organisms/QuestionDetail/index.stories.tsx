@@ -66,3 +66,16 @@ Faild.args = {
     answeredCorrectly: false,
   },
 };
+
+export const Loading = Template.bind({});
+Loading.args = {
+  status: 'Loading',
+  question: {
+    questionID: '',
+    title: '',
+    description: '',
+    testCases: [],
+    assertions: [],
+    answeredCorrectly: false,
+  },
+};
