@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState, VFC } from 'react';
+import { Container, Paper, Typography } from '@mui/material';
 import AnswerRequest from '../../../models/AnswerRequest';
 import QuestionDtailResponse from '../../../models/QuestionDtailResponse';
 import { Editor } from '../../atoms/Editor';
@@ -55,12 +56,21 @@ export const QuestionAnswer: VFC<QuestionAnswerProps> = (props: QuestionAnswerPr
   };
 
   return (
-    <>
-      <h1>{question.title}</h1>
-      <h2>{question.description}</h2>
-      <Editor theme="solarized_dark" fontsize={14} value={code} onChange={setCode} />
-      <Button value="実行" onClick={onClick} />
-      <p>{result}</p>
-    </>
+    <Container component="main">
+      <Paper
+        sx={{
+          marginTop: 8,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        <Typography variant="h3">{question.title}</Typography>
+        <Typography variant="subtitle1">{question.description}</Typography>
+        <Editor theme="solarized_dark" fontsize={14} value={code} onChange={setCode} />
+        <Button value="実行" onClick={onClick} sx={{ marginBottom: 8 }} />
+        <p>{result}</p>
+      </Paper>
+    </Container>
   );
 };
