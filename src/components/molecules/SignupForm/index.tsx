@@ -1,15 +1,14 @@
-import { Box, Typography } from '@mui/material';
+import { Container, Paper, Theme, Typography } from '@mui/material';
+import { SxProps } from '@mui/system';
 import { useState, VFC } from 'react';
-import styled from 'styled-components';
 import SignupRequest from '../../../models/SignupRequest';
 import { Button } from '../../atoms/Button';
 import { FormInput } from '../../atoms/FormInput';
 import { useSignup } from '../../context/UserAuthContext';
 
-const StyledButton = styled(Button)`
-  margin-top: 3px;
-  margin-bottom: 2px;
-`;
+const buttonStyle: SxProps<Theme> = {
+  marginBottom: 8,
+};
 
 export const SignupForm: VFC = () => {
   const [email, setEmail] = useState('');
@@ -26,20 +25,16 @@ export const SignupForm: VFC = () => {
   };
 
   return (
-    <Box
-      sx={{
-        marginTop: 8,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-      }}
-    >
-      <Typography variant="h5">Signup</Typography>
-      <Box
-        component="form"
-        noValidate
-        sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 1 }}
+    <Container component="main" maxWidth="xs">
+      <Paper
+        sx={{
+          marginTop: 8,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
       >
+        <Typography variant="h5">Signup</Typography>
         <FormInput
           type="text"
           placeholder="Sample@sample.com"
@@ -56,8 +51,8 @@ export const SignupForm: VFC = () => {
           value={password}
           margin="normal"
         />
-        <StyledButton value="Signup" onClick={handleSignup} />
-      </Box>
-    </Box>
+        <Button value="Signup" onClick={handleSignup} sx={buttonStyle} />
+      </Paper>
+    </Container>
   );
 };

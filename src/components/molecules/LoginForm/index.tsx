@@ -1,15 +1,14 @@
-import { Box, Typography } from '@mui/material';
+import { Container, Paper, Typography, Theme } from '@mui/material';
+import { SxProps } from '@mui/system';
 import { useState, VFC } from 'react';
-import styled from 'styled-components';
 import LoginRequest from '../../../models/LoginRequest';
 import { Button } from '../../atoms/Button';
 import { FormInput } from '../../atoms/FormInput';
 import { useLogin } from '../../context/UserAuthContext';
 
-const StyledButton = styled(Button)`
-  margin-top: 3px;
-  margin-bottom: 2px;
-`;
+const buttonStyle: SxProps<Theme> = {
+  marginBottom: 8,
+};
 
 export const LoginForm: VFC = () => {
   const [userName, setUserName] = useState('');
@@ -27,20 +26,18 @@ export const LoginForm: VFC = () => {
   };
 
   return (
-    <Box
-      sx={{
-        marginTop: 8,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-      }}
-    >
-      <Typography variant="h5">Login</Typography>
-      <Box
-        component="form"
-        noValidate
-        sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 1 }}
+    <Container component="main" maxWidth="xs">
+      <Paper
+        sx={{
+          marginTop: 8,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
       >
+        <Typography variant="h5" sx={{ marginTop: 8 }}>
+          Login
+        </Typography>
         <FormInput
           type="text"
           placeholder="Sample@sample.com"
@@ -57,8 +54,8 @@ export const LoginForm: VFC = () => {
           value={password}
           margin="normal"
         />
-        <StyledButton value="Login" onClick={handleLogin} />
-      </Box>
-    </Box>
+        <Button value="Login" onClick={handleLogin} sx={buttonStyle} />
+      </Paper>
+    </Container>
   );
 };

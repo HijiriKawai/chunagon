@@ -1,15 +1,14 @@
-import { Box, Typography } from '@mui/material';
+import { Container, Paper, Theme, Typography } from '@mui/material';
+import { SxProps } from '@mui/system';
 import { useState, VFC } from 'react';
-import styled from 'styled-components';
 import ConfirmRequest from '../../../models/ConfirmRequest';
 import { Button } from '../../atoms/Button';
 import { FormInput } from '../../atoms/FormInput';
 import { useConfirm, useSignupUser } from '../../context/UserAuthContext';
 
-const StyledButton = styled(Button)`
-  margin-top: 3px;
-  margin-bottom: 2px;
-`;
+const buttonStyle: SxProps<Theme> = {
+  marginBottom: 8,
+};
 
 export const ConfirmForm: VFC = () => {
   const [number, setNumber] = useState('');
@@ -28,20 +27,16 @@ export const ConfirmForm: VFC = () => {
   };
 
   return (
-    <Box
-      sx={{
-        marginTop: 8,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-      }}
-    >
-      <Typography variant="h5">メールに届いた番号を入力</Typography>
-      <Box
-        component="form"
-        noValidate
-        sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', mt: 1 }}
+    <Container component="main" maxWidth="xs">
+      <Paper
+        sx={{
+          marginTop: 8,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
       >
+        <Typography variant="h5">メールに届いた番号を入力</Typography>
         <FormInput
           type="number"
           placeholder="1234"
@@ -50,8 +45,8 @@ export const ConfirmForm: VFC = () => {
           value={number}
           margin="normal"
         />
-        <StyledButton value="Confirm" onClick={handlesignup} />
-      </Box>
-    </Box>
+        <Button value="Confirm" onClick={handlesignup} sx={buttonStyle} />
+      </Paper>
+    </Container>
   );
 };
