@@ -1,11 +1,14 @@
+import { Container, Paper, Theme, Typography } from '@mui/material';
+import { SxProps } from '@mui/system';
 import { useState, VFC } from 'react';
-import styled from 'styled-components';
 import SignupRequest from '../../../models/SignupRequest';
-import { FormButton } from '../../atoms/FormButton';
+import { Button } from '../../atoms/Button';
 import { FormInput } from '../../atoms/FormInput';
-import { useSignup } from '../../context/UserAuthContext';
+import { useSignup } from '../../../context/UserAuthContext';
 
-const StyledDiv = styled.div``;
+const buttonStyle: SxProps<Theme> = {
+  marginBottom: 8,
+};
 
 export const SignupForm: VFC = () => {
   const [email, setEmail] = useState('');
@@ -22,22 +25,36 @@ export const SignupForm: VFC = () => {
   };
 
   return (
-    <StyledDiv>
-      <form>
+    <Container component="main" maxWidth="xs">
+      <Paper
+        sx={{
+          marginTop: 8,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        <Typography variant="h5" sx={{ marginTop: 8 }}>
+          Signup
+        </Typography>
         <FormInput
           type="text"
           placeholder="Sample@sample.com"
+          label="Email"
           onChange={(e) => setEmail(e.target.value)}
           value={email}
+          margin="normal"
         />
         <FormInput
           type="password"
           placeholder="Password"
+          label="Password"
           onChange={(e) => setPassword(e.target.value)}
           value={password}
+          margin="normal"
         />
-        <FormButton value="Signup" onClick={handleSignup} />
-      </form>
-    </StyledDiv>
+        <Button value="Signup" onClick={handleSignup} sx={buttonStyle} />
+      </Paper>
+    </Container>
   );
 };

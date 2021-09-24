@@ -2,3 +2,4 @@
 /prettier.config.js
 /build
 /storybook-static
+/config-overrides.js

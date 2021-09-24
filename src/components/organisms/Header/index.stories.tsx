@@ -1,10 +1,10 @@
 import { MemoryRouter } from 'react-router-dom';
-import { ComponentStory, ComponentMeta, storiesOf } from '@storybook/react';
+import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { Header } from './index';
 
 export default {
-  title: 'Example/Header',
+  title: 'Example/organisms/Header',
   component: Header,
   argTypes: {},
 } as ComponentMeta<typeof Header>;
@@ -15,4 +15,4 @@ const Template: ComponentStory<typeof Header> = () => (
   </MemoryRouter>
 );
 
-export const header = Template.bind({});
+export const Default = Template.bind({});

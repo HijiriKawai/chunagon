@@ -1,12 +1,12 @@
 import axios from 'axios';
 import { FC, createContext, useContext, useState } from 'react';
 import { Redirect, useHistory } from 'react-router-dom';
-import ConfirmRequest from '../../models/ConfirmRequest';
-import LoginRequest from '../../models/LoginRequest';
-import LoginResponse from '../../models/LoginResponse';
-import LogoutRequest from '../../models/LogoutRequest';
-import SignupRequest from '../../models/SignupRequest';
-import SignupResponse from '../../models/SignupResponse';
+import ConfirmRequest from '../models/ConfirmRequest';
+import LoginRequest from '../models/LoginRequest';
+import LoginResponse from '../models/LoginResponse';
+import LogoutRequest from '../models/LogoutRequest';
+import SignupRequest from '../models/SignupRequest';
+import SignupResponse from '../models/SignupResponse';
 
 const AuthUserContext = createContext<LoginResponse | null>(null);
 const SignupUserContext = createContext<SignupResponse | null>(null);
