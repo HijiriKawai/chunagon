@@ -6,6 +6,7 @@ import QuestionDtailResponse from '../../../models/QuestionDtailResponse';
 import { Editor } from '../../atoms/Editor';
 import { useAuthUser } from '../../../context/UserAuthContext';
 import { Button } from '../../atoms/Button';
+import baseUrl from '../../../utils/ApiUrl';
 
 type QuestionAnswerProps = {
   question: QuestionDtailResponse;
@@ -18,7 +19,8 @@ export const QuestionAnswer: VFC<QuestionAnswerProps> = (props: QuestionAnswerPr
   const [result, setResult] = useState<string>('');
   const authUser = useAuthUser();
   const token = authUser?.accessToken;
-  const url = `http://localhost:8888/answer`;
+  const base = baseUrl();
+  const url = `${base}/answer`;
 
   useEffect(() => {
     setCode(`console.log("Hello World!");`);

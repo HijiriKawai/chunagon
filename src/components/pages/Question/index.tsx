@@ -5,6 +5,7 @@ import QuestionDtailResponse from '../../../models/QuestionDtailResponse';
 import CommunicationStatus from '../../../utils/CommunicationStatusType';
 import { useAuthUser } from '../../../context/UserAuthContext';
 import { QuestionDetail } from '../../organisms/QuestionDetail';
+import baseUrl from '../../../utils/ApiUrl';
 
 type RouterParams = {
   questionID: string;
@@ -23,7 +24,8 @@ export const Question: VFC = () => {
   const { questionID } = useParams<RouterParams>();
   const authUser = useAuthUser();
   const token = authUser?.accessToken;
-  const url = `http://localhost:8888/question/${questionID}`;
+  const base = baseUrl();
+  const url = `${base}/question/${questionID}`;
   useEffect(() => {
     axios
       .get<QuestionDtailResponse>(url, {

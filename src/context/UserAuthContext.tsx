@@ -7,6 +7,7 @@ import LoginResponse from '../models/LoginResponse';
 import LogoutRequest from '../models/LogoutRequest';
 import SignupRequest from '../models/SignupRequest';
 import SignupResponse from '../models/SignupResponse';
+import baseUrl from '../utils/ApiUrl';
 
 const AuthUserContext = createContext<LoginResponse | null>(null);
 const SignupUserContext = createContext<SignupResponse | null>(null);
@@ -33,9 +34,10 @@ export const AuthUserProvider: FC = ({ children }) => {
   const [authUser, setAuthUser] = useState<LoginResponse | null>(null);
   const [signupUser, setSignupUser] = useState<SignupResponse | null>(null);
   const history = useHistory();
+  const base = baseUrl();
 
   const signup = async (req: SignupRequest) => {
-    const url = 'http://localhost:8888/signup';
+    const url = `${base}/signup`;
     const json = JSON.stringify(req);
 
     axios
@@ -56,7 +58,7 @@ export const AuthUserProvider: FC = ({ children }) => {
   };
 
   const confirm = async (req: ConfirmRequest) => {
-    const url = 'http://localhost:8888/signup/confirm';
+    const url = `${base}/signup/confirm`;
 
     const json = JSON.stringify(req);
 
@@ -80,7 +82,7 @@ export const AuthUserProvider: FC = ({ children }) => {
   };
 
   const login = async (req: LoginRequest) => {
-    const url = 'http://localhost:8888/login';
+    const url = `${base}/login`;
     const params = new URLSearchParams();
 
     params.append('grant_type', req.grant_type);
@@ -103,7 +105,7 @@ export const AuthUserProvider: FC = ({ children }) => {
   };
 
   const logout = async (req: LogoutRequest) => {
-    const url = 'http://localhost:8888/login';
+    const url = `${base}/login`;
     const params = new URLSearchParams();
 
     params.append('grant_type', req.grant_type);

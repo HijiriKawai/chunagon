@@ -4,13 +4,15 @@ import QuestionsResponse from '../../../models/QuestionResponse';
 import CommunicationStatus from '../../../utils/CommunicationStatusType';
 import { useAuthUser } from '../../../context/UserAuthContext';
 import { QuestionList } from '../../organisms/QuestionList';
+import baseUrl from '../../../utils/ApiUrl';
 
 export const Home: VFC = () => {
   const [questions, setQuestions] = useState<QuestionsResponse>([]);
   const [status, setStatus] = useState<CommunicationStatus>('Loading');
   const authUser = useAuthUser();
   const token = authUser?.accessToken;
-  const url = 'http://localhost:8888/question';
+  const base = baseUrl();
+  const url = `${base}/question`;
   useEffect(() => {
     axios
       .get<QuestionsResponse>(url, {
@@ -25,7 +27,7 @@ export const Home: VFC = () => {
       .catch(() => {
         setStatus('Faild');
       });
-  }, [token]);
+  }, [token, url]);
 
   return <QuestionList status={status} questions={questions} />;
 };
