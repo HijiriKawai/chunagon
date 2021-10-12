@@ -15,14 +15,16 @@ front end app
 
 ## 実行可能なスクリプト
 
-| コマンド  | 説明                                       |
-| --------- | ------------------------------------------ |
-| start     | <http://localhost:3000> で開発モードで起動 |
-| build     | アプリをビルド                             |
-| test      | テストを実行                               |
-| lint      | linterを実行                               |
-| fix       | lintで出たエラーを自動修正                 |
-| storybook | <http://localhost:6006> でstorybookを起動  |
+| コマンド         | 説明                                                          |
+| ---------------- | ------------------------------------------------------------- |
+| start            | <http://localhost:3000> で開発モードで起動                    |
+| build            | アプリをビルド                                                |
+| test             | テストを実行                                                  |
+| lint             | linterを実行                                                  |
+| fix              | lintで出たエラーを自動修正                                    |
+| storybook        | <http://localhost:6006> でstorybookを起動                     |
+| build-storybook  | storybookをビルド                                             |
+| deploy-storybook | <https://hijirikawai.github.io/chunagon/>にsorybookをデプロイ |
 
 ## 作成上での注意点
 
