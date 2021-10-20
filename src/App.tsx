@@ -1,5 +1,5 @@
 import { BrowserRouter, Redirect, Route, RouteProps, Switch } from 'react-router-dom';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { AuthUserProvider, useAuthUser } from './context/UserAuthContext';
 import { Footer } from './components/organisms/Footer';
 import { Header } from './components/organisms/Header';

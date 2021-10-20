@@ -1,6 +1,6 @@
 import { VFC } from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { CheckBox, CheckBoxOutlineBlank } from '@mui/icons-material';
 import QuestionsResponse from '../../../models/QuestionResponse';
 

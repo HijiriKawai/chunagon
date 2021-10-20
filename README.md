@@ -10,7 +10,7 @@ front end app
 | コードフォーマッタ      | prettier               |
 | UI Component 管理ツール | Storybook              |
 | jsフレームワーク        | React                  |
-| Css in js               | styled-components      |
+| Css in js               | emotion                |
 | Cssフレームワーク       | MUI(旧Material-UI)     |
 
 ## 実行可能なスクリプト
