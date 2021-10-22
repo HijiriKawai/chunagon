@@ -1,3 +1,5 @@
+/* eslint-disable eslint-comments/disable-enable-pair */
+/* eslint-disable @typescript-eslint/no-implied-eval */
 import axios from 'axios';
 import { useEffect, useState, VFC } from 'react';
 import { Container, Paper, Typography } from '@mui/material';
@@ -32,8 +34,8 @@ export const QuestionAnswer: VFC<QuestionAnswerProps> = (props: QuestionAnswerPr
   const onClick = () => {
     for (let index = 0; index < question.testCases.length; index += 1) {
       const args = question.testCases[index].input;
-      // eslint-disable-next-line no-eval
-      setResult(eval(code));
+      const executor = new Function(`return ${code}${args}`);
+      setResult(executor());
       if (result === question.testCases[index].expected) {
         corrects[index] = true;
       }
