@@ -56,7 +56,7 @@ Default.args = {
 
 export const Faild = Template.bind({});
 Faild.args = {
-  status: 'Faild',
+  status: 'Failed',
   question: {
     questionID: '',
     title: '',

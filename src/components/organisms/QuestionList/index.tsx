@@ -14,7 +14,7 @@ export const QuestionList: VFC<QuestionListProps> = (props: QuestionListProps) =
   const { status, questions } = props;
   const questionDetail = {
     OK: QuestionsBox,
-    Faild: FailedBox,
+    Failed: FailedBox,
     Loading: LoadingBox,
   };
 
