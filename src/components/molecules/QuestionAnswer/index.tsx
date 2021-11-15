@@ -59,6 +59,8 @@ export const QuestionAnswer: VFC<QuestionAnswerProps> = (props: QuestionAnswerPr
           history.push('/Home');
         })
         .catch(() => {});
+    } else {
+      corrects.splice(0);
     }
   };
 
