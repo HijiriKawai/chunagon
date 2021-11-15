@@ -3,6 +3,7 @@
 import axios from 'axios';
 import { useEffect, useState, VFC } from 'react';
 import { Container, Paper, Typography } from '@mui/material';
+import { useHistory } from 'react-router-dom';
 import AnswerRequest from '../../../models/AnswerRequest';
 import QuestionDetailResponse from '../../../models/QuestionDetailResponse';
 import { Editor } from '../../atoms/Editor';
@@ -16,35 +17,35 @@ type QuestionAnswerProps = {
 
 export const QuestionAnswer: VFC<QuestionAnswerProps> = (props: QuestionAnswerProps) => {
   const { question } = props;
+  const history = useHistory();
   const [code, setCode] = useState<string>('');
   const [corrects, setCorrects] = useState<boolean[]>([]);
-  const [result, setResult] = useState<string>('');
+  const [result, setResult] = useState<any>('');
   const authUser = useAuthUser();
   const token = authUser?.accessToken;
   const base = baseUrl();
   const url = `${base}/answer`;
 
   useEffect(() => {
-    setCode(`console.log("Hello World!");`);
-    for (let index = 0; index < question.testCases.length; index += 1) {
-      corrects.push(false);
-    }
-  }, [corrects, question.testCases.length]);
+    setCode(question.defaultCode);
+  }, [question.defaultCode]);
 
   const onClick = () => {
     for (let index = 0; index < question.testCases.length; index += 1) {
       const args = question.testCases[index].input;
       const executor = new Function(`return ${code}${args}`);
-      setResult(executor());
-      if (result === question.testCases[index].expected) {
-        corrects[index] = true;
+      const x = executor();
+      setResult(x);
+      if (`${x}` === question.testCases[index].expected) {
+        corrects.push(true);
       }
     }
 
-    if (corrects.every((correct) => correct)) {
+    if (corrects.length === question.testCases.length) {
       const post: AnswerRequest = {
         questionID: question.questionID,
         isCorrect: true,
+        failedAssertions: [],
       };
 
       axios
@@ -54,7 +55,9 @@ export const QuestionAnswer: VFC<QuestionAnswerProps> = (props: QuestionAnswerPr
             'Content-Type': 'application/json',
           },
         })
-        .then(() => {})
+        .then(() => {
+          history.push('/Home');
+        })
         .catch(() => {});
     }
   };

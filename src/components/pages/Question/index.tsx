@@ -19,6 +19,8 @@ export const Question: VFC = () => {
     testCases: [],
     assertions: [],
     answeredCorrectly: false,
+    tags: [],
+    defaultCode: '',
   });
   const [status, setStatus] = useState<CommunicationStatus>('Loading');
   const { questionID } = useParams<RouterParams>();

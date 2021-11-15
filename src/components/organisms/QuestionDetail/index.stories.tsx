@@ -42,15 +42,46 @@ Default.args = {
     ],
     assertions: [
       {
+        id: '2f644942-e039-4a1c-aab2-bfb8d67d5ff9',
         assertion: "'+' in code",
         message: '加算が行われていない可能性があります',
+        tags: [
+          {
+            id: '2f644942-e039-4a1c-aab2-bfb8d67d5ff9',
+            name: '算術理解',
+            tutorialLink:
+              'https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Expressions_and_Operators',
+          },
+        ],
       },
       {
+        id: '2f644942-e039-4a1c-aab2-bfb8d67d5ff9',
         assertion: 'add(0, 0) === undefined',
         message: '値が返却されていない可能性があります',
+        tags: [
+          {
+            id: '2f644942-e039-4a1c-aab2-bfb8d67d5ff9',
+            name: '関数理解',
+            tutorialLink: 'https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Functions',
+          },
+        ],
       },
     ],
     answeredCorrectly: false,
+    tags: [
+      {
+        id: '2f644942-e039-4a1c-aab2-bfb8d67d5ff9',
+        name: '算術理解',
+        tutorialLink:
+          'https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Expressions_and_Operators',
+      },
+      {
+        id: '2f644942-e039-4a1c-aab2-bfb8d67d5ff9',
+        name: '関数理解',
+        tutorialLink: 'https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Functions',
+      },
+    ],
+    defaultCode: 'function add(first, second) {\n    // your code here\n\n}',
   },
 };
 
@@ -64,6 +95,8 @@ Faild.args = {
     testCases: [],
     assertions: [],
     answeredCorrectly: false,
+    tags: [],
+    defaultCode: '',
   },
 };
 
@@ -77,5 +110,7 @@ Loading.args = {
     testCases: [],
     assertions: [],
     answeredCorrectly: false,
+    tags: [],
+    defaultCode: '',
   },
 };
