@@ -4,14 +4,14 @@ import axios from 'axios';
 import { useEffect, useState, VFC } from 'react';
 import { Container, Paper, Typography } from '@mui/material';
 import AnswerRequest from '../../../models/AnswerRequest';
-import QuestionDtailResponse from '../../../models/QuestionDtailResponse';
+import QuestionDetailResponse from '../../../models/QuestionDetailResponse';
 import { Editor } from '../../atoms/Editor';
 import { useAuthUser } from '../../../context/UserAuthContext';
 import { Button } from '../../atoms/Button';
 import baseUrl from '../../../utils/ApiUrl';
 
 type QuestionAnswerProps = {
-  question: QuestionDtailResponse;
+  question: QuestionDetailResponse;
 };
 
 export const QuestionAnswer: VFC<QuestionAnswerProps> = (props: QuestionAnswerProps) => {
@@ -41,7 +41,7 @@ export const QuestionAnswer: VFC<QuestionAnswerProps> = (props: QuestionAnswerPr
       }
     }
 
-    if (corrects.every((correct) => correct === true)) {
+    if (corrects.every((correct) => correct)) {
       const post: AnswerRequest = {
         questionID: question.questionID,
         isCorrect: true,
@@ -54,8 +54,8 @@ export const QuestionAnswer: VFC<QuestionAnswerProps> = (props: QuestionAnswerPr
             'Content-Type': 'application/json',
           },
         })
-        .then((Response) => {})
-        .catch((Error) => {});
+        .then(() => {})
+        .catch(() => {});
     }
   };
 

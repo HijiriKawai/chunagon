@@ -8,7 +8,7 @@ type Assertion = {
   message: string;
 };
 
-type QuestionDtailResponse = {
+type QuestionDetailResponse = {
   questionID: string;
   title: string;
   description: string;
@@ -17,4 +17,4 @@ type QuestionDtailResponse = {
   answeredCorrectly: boolean;
 };
 
-export default QuestionDtailResponse;
+export default QuestionDetailResponse;

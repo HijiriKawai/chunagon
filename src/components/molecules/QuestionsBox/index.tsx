@@ -1,4 +1,4 @@
-import { Box, Container, Paper } from '@mui/material';
+import { Container, Paper } from '@mui/material';
 import { VFC } from 'react';
 import QuestionsResponse from '../../../models/QuestionResponse';
 import { Questions } from '../../atoms/Questions';

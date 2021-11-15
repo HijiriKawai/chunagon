@@ -52,7 +52,7 @@ export const AuthUserProvider: FC = ({ children }) => {
         };
         setSignupUser(obj);
       })
-      .catch((Error) => {
+      .catch(() => {
         <Redirect to="/signup" />;
       });
   };
@@ -76,7 +76,7 @@ export const AuthUserProvider: FC = ({ children }) => {
         setAuthUser(obj);
         history.push('/home');
       })
-      .catch((Response) => {
+      .catch(() => {
         <Redirect to="/signup" />;
       });
   };
@@ -99,7 +99,7 @@ export const AuthUserProvider: FC = ({ children }) => {
         setAuthUser(obj);
         history.push('/home');
       })
-      .catch((Response) => {
+      .catch(() => {
         <Redirect to="/login" />;
       });
   };
@@ -113,11 +113,11 @@ export const AuthUserProvider: FC = ({ children }) => {
 
     axios
       .post(url, params)
-      .then((Response) => {
+      .then(() => {
         setAuthUser(null);
         history.push('/');
       })
-      .catch((Response) => {
+      .catch(() => {
         <Redirect to="/home" />;
       });
   };

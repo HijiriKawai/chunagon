@@ -16,7 +16,7 @@ export const ConfirmForm: VFC = () => {
 
   const confirm = useConfirm();
 
-  const handlesignup = () => {
+  const handleSignup = () => {
     if (signupUser) {
       const req: ConfirmRequest = {
         token: signupUser.token,
@@ -47,7 +47,7 @@ export const ConfirmForm: VFC = () => {
           value={number}
           margin="normal"
         />
-        <Button value="Confirm" onClick={handlesignup} sx={buttonStyle} />
+        <Button value="Confirm" onClick={handleSignup} sx={buttonStyle} />
       </Paper>
     </Container>
   );
