@@ -1,3 +1,5 @@
+import AssertionType from './AssertionType';
+
 type Tag = {
   id: string;
   name: string;
@@ -9,14 +11,14 @@ type TestCase = {
   expected: string;
 };
 
-type Assertion = {
+export type Assertion = {
   id: string;
-  assertion: string;
+  assertion: AssertionType;
   message: string;
   tags: Tag[];
 };
 
-type QuestionDetailResponse = {
+export type QuestionDetailResponse = {
   questionID: string;
   title: string;
   description: string;
@@ -26,5 +28,3 @@ type QuestionDetailResponse = {
   tags: Tag[];
   defaultCode: string;
 };
-
-export default QuestionDetailResponse;

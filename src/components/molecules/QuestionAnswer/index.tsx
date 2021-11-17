@@ -5,11 +5,12 @@ import { useEffect, useState, VFC } from 'react';
 import { Container, Paper, Typography } from '@mui/material';
 import { useHistory } from 'react-router-dom';
 import AnswerRequest from '../../../models/AnswerRequest';
-import QuestionDetailResponse from '../../../models/QuestionDetailResponse';
+import { QuestionDetailResponse } from '../../../models/QuestionDetailResponse';
 import { Editor } from '../../atoms/Editor';
 import { useAuthUser } from '../../../context/UserAuthContext';
 import { Button } from '../../atoms/Button';
 import baseUrl from '../../../utils/ApiUrl';
+import { checkAssertion } from '../../../utils/Assertion';
 
 type QuestionAnswerProps = {
   question: QuestionDetailResponse;
@@ -20,7 +21,7 @@ export const QuestionAnswer: VFC<QuestionAnswerProps> = (props: QuestionAnswerPr
   const history = useHistory();
   const [code, setCode] = useState<string>('');
   const [corrects, setCorrects] = useState<boolean[]>([]);
-  const [result, setResult] = useState<any>('');
+  const [results, setResults] = useState<any[]>([]);
   const authUser = useAuthUser();
   const token = authUser?.accessToken;
   const base = baseUrl();
@@ -34,9 +35,9 @@ export const QuestionAnswer: VFC<QuestionAnswerProps> = (props: QuestionAnswerPr
     for (let index = 0; index < question.testCases.length; index += 1) {
       const args = question.testCases[index].input;
       const executor = new Function(`return ${code}${args}`);
-      const x = executor();
-      setResult(x);
-      if (`${x}` === question.testCases[index].expected) {
+      const resurt = executor();
+      results.push(resurt);
+      if (`${resurt}` === question.testCases[index].expected) {
         corrects.push(true);
       }
     }
@@ -60,8 +61,25 @@ export const QuestionAnswer: VFC<QuestionAnswerProps> = (props: QuestionAnswerPr
         })
         .catch(() => {});
     } else {
-      corrects.splice(0);
+      const failedAssertions = checkAssertion(results, code, question.assertions);
+      const post: AnswerRequest = {
+        questionID: question.questionID,
+        isCorrect: false,
+        failedAssertions,
+      };
+
+      axios
+        .post(url, JSON.stringify(post), {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        })
+        .then(() => {})
+        .catch(() => {});
     }
+    setCorrects([]);
+    setResults([]);
   };
 
   return (
@@ -79,7 +97,7 @@ export const QuestionAnswer: VFC<QuestionAnswerProps> = (props: QuestionAnswerPr
         <Typography variant="subtitle1">{question.description}</Typography>
         <Editor theme="solarized_dark" fontsize={14} value={code} onChange={setCode} />
         <Button value="実行" onClick={onClick} sx={{ marginBottom: 8 }} />
-        <p>{result}</p>
+        <p>{results}</p>
       </Paper>
     </Container>
   );
