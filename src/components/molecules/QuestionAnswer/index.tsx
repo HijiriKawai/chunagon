@@ -2,15 +2,15 @@
 /* eslint-disable @typescript-eslint/no-implied-eval */
 import axios from 'axios';
 import { useEffect, useState, VFC } from 'react';
-import { Box, Container, Modal, Paper, Typography } from '@mui/material';
+import { Box, Container, Modal, Paper, Theme, Typography } from '@mui/material';
 import { useHistory } from 'react-router-dom';
+import { SxProps } from '@mui/system';
 import AnswerRequest from '../../../models/AnswerRequest';
 import { QuestionDetailResponse } from '../../../models/QuestionDetailResponse';
 import { Editor } from '../../atoms/Editor';
 import { useAuthUser } from '../../../context/UserAuthContext';
 import { Button } from '../../atoms/Button';
 import baseUrl from '../../../utils/ApiUrl';
-import { checkAssertion } from '../../../utils/Assertion';
 import { ConvertAllCode, ConvertAllToNode, RunAssertions } from '../../../utils/shonagon';
 
 type QuestionAnswerProps = {
@@ -27,10 +27,23 @@ export const QuestionAnswer: VFC<QuestionAnswerProps> = (props: QuestionAnswerPr
   const [detail, setDetail] = useState<string>('');
   const [open, setOpen] = useState(false);
   const handleClose = () => setOpen(false);
+  const handleOpen = () => setOpen(true);
   const authUser = useAuthUser();
   const token = authUser?.accessToken;
   const base = baseUrl();
   const url = `${base}/answer`;
+
+  const style: SxProps<Theme> = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 400,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
 
   useEffect(() => {
     setCode(question.defaultCode);
@@ -122,7 +135,7 @@ export const QuestionAnswer: VFC<QuestionAnswerProps> = (props: QuestionAnswerPr
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box>
+        <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
             {title}
           </Typography>
