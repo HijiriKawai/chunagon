@@ -1,3 +1,9 @@
-const { useBabelRc, override } = require('customize-cra');
+module.exports = function override(webpackConfig) {
+  webpackConfig.module.rules.push({
+    test: /.mjs$/,
+    include: /node_modules/,
+    type: 'javascript/auto',
+  });
 
-module.exports = override(useBabelRc());
+  return webpackConfig;
+};

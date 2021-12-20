@@ -11,7 +11,9 @@
 /* eslint-disable prefer-destructuring */
 
 import { LooseParser as Parser } from 'acorn-loose';
-import { escodegen } from 'escodegen';
+// import { escodegen } from 'escodegen';
+
+const escodegen = require('escodegen');
 
 function forToWhile(node) {
   console.assert(node.type === 'ForStatement', 'is given node a for statement');
@@ -265,7 +267,6 @@ function ConvertAllToNode(code) {
 function RunAssertions(assertions, node_) {
   const failure = [];
   const nodes = new NodeWalker().walkNode(node_);
-  console.log(nodes);
   nodes.forEach((node) => {
     assertions.assertions.forEach((assertion) => {
       RecursiveCompare(assertion.assertion, node);

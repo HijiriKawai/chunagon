@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-implied-eval */
 import axios from 'axios';
 import { useEffect, useState, VFC } from 'react';
-import { Container, Paper, Typography } from '@mui/material';
+import { Box, Container, Modal, Paper, Typography } from '@mui/material';
 import { useHistory } from 'react-router-dom';
 import AnswerRequest from '../../../models/AnswerRequest';
 import { QuestionDetailResponse } from '../../../models/QuestionDetailResponse';
@@ -11,6 +11,7 @@ import { useAuthUser } from '../../../context/UserAuthContext';
 import { Button } from '../../atoms/Button';
 import baseUrl from '../../../utils/ApiUrl';
 import { checkAssertion } from '../../../utils/Assertion';
+import { ConvertAllCode, ConvertAllToNode, RunAssertions } from '../../../utils/shonagon';
 
 type QuestionAnswerProps = {
   question: QuestionDetailResponse;
@@ -22,6 +23,10 @@ export const QuestionAnswer: VFC<QuestionAnswerProps> = (props: QuestionAnswerPr
   const [code, setCode] = useState<string>('');
   const [corrects, setCorrects] = useState<boolean[]>([]);
   const [results, setResults] = useState<any[]>([]);
+  const [title, setTitle] = useState<string>('');
+  const [detail, setDetail] = useState<string>('');
+  const [open, setOpen] = useState(false);
+  const handleClose = () => setOpen(false);
   const authUser = useAuthUser();
   const token = authUser?.accessToken;
   const base = baseUrl();
@@ -45,8 +50,31 @@ export const QuestionAnswer: VFC<QuestionAnswerProps> = (props: QuestionAnswerPr
         corrects.push(true);
       }
     }
+    const newCode = ConvertAllCode(code) as string;
+    const failedAssertions = RunAssertions(question, ConvertAllToNode(newCode)) as any[];
 
-    if (corrects.length === question.testCases.length) {
+    if (failedAssertions.length) {
+      const post: AnswerRequest = {
+        questionID: question.questionID,
+        isCorrect: false,
+        failedAssertions,
+      };
+
+      axios
+        .post(url, JSON.stringify(post), {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        })
+        .then(() => {})
+        .catch(() => {});
+      setCorrects([]);
+      setResults([]);
+      setTitle('失敗');
+      const message = failedAssertions.map((j) => j.message).join('\n');
+      setDetail(message);
+    } else {
       const post: AnswerRequest = {
         questionID: question.questionID,
         isCorrect: true,
@@ -64,28 +92,12 @@ export const QuestionAnswer: VFC<QuestionAnswerProps> = (props: QuestionAnswerPr
           history.push('/Home');
         })
         .catch(() => {});
-    } else {
-      const failedAssertions = checkAssertion(results, code, question.assertions);
-      const post: AnswerRequest = {
-        questionID: question.questionID,
-        isCorrect: false,
-        failedAssertions,
-      };
-
-      axios
-        .post(url, JSON.stringify(post), {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-        })
-        .then(() => {})
-        .catch(() => {});
+      setTitle('成功');
+      setDetail('');
     }
-    setCorrects([]);
-    setResults([]);
-  };
 
+    setOpen(true);
+  };
   return (
     <Container component="main">
       <Paper
@@ -104,6 +116,21 @@ export const QuestionAnswer: VFC<QuestionAnswerProps> = (props: QuestionAnswerPr
         <Button value="実行" onClick={execute} sx={{ marginBottom: 8 }} />
         <p>{results}</p>
       </Paper>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            {title}
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            {detail}
+          </Typography>
+        </Box>
+      </Modal>
     </Container>
   );
 };

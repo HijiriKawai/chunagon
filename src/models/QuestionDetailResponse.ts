@@ -1,5 +1,3 @@
-import AssertionType from './AssertionType';
-
 type Tag = {
   id: string;
   name: string;
@@ -13,8 +11,8 @@ type TestCase = {
 
 export type Assertion = {
   id: string;
-  assertion: AssertionType;
   message: string;
+  assertion: string;
   tags: Tag[];
 };
 
@@ -22,9 +20,9 @@ export type QuestionDetailResponse = {
   questionID: string;
   title: string;
   description: string;
+  defaultCode: string;
+  tags: Tag[];
   testCases: TestCase[];
   assertions: Assertion[];
   answeredCorrectly: boolean;
-  tags: Tag[];
-  defaultCode: string;
 };
