@@ -45,9 +45,9 @@ export const QuestionAnswer: VFC<QuestionAnswerProps> = (props: QuestionAnswerPr
       const args = question.testCases[index].input;
       try {
         const executor = new Function(`return ${code}${args}`);
-        const resurt = executor();
-        results.push(resurt);
-        if (`${resurt}` === question.testCases[index].expected) {
+        const result = executor();
+        results.push(result);
+        if (`${result}` === question.testCases[index].expected) {
           corrects.push(true);
         }
       } catch {
@@ -57,12 +57,13 @@ export const QuestionAnswer: VFC<QuestionAnswerProps> = (props: QuestionAnswerPr
     }
     const newCode = ConvertAllCode(code) as string;
     const failedAssertions = RunAssertions(question, ConvertAllToNode(newCode)) as any[];
+    const failedAssertionsId = failedAssertions.map((assertion) => assertion.id) as string[];
 
     if (failedAssertions.length) {
       const post: AnswerRequest = {
         questionID: question.questionID,
         isCorrect: false,
-        failedAssertions,
+        failedAssertions: failedAssertionsId,
       };
 
       axios
@@ -78,15 +79,19 @@ export const QuestionAnswer: VFC<QuestionAnswerProps> = (props: QuestionAnswerPr
       setResults([]);
       setTitle('失敗');
       const message = failedAssertions.map((j) => j.message).join('\n');
+      const tagUrlToName = new Map<string, string>();
       const originalUrls = failedAssertions
         .map((j) =>
-          j.tags.map((tag: { tutorial_link: any }) => {
+          j.tags.map((tag: { tutorial_link: string; name: string }) => {
+            tagUrlToName.set(tag.tutorial_link, tag.name);
             return tag.tutorial_link;
           })
         )
         .flat() as string[];
-      const urls = Array.from(new Set(originalUrls)).join('\n');
-      setDetail(message + urls);
+      const urls = Array.from(new Set(originalUrls))
+        .map((u) => `\n    ${tagUrlToName.get(u)}: ${u}`)
+        .join('');
+      setDetail(`${message}\n\n再学習が必要そうな項目:${urls}`);
     } else {
       const post: AnswerRequest = {
         questionID: question.questionID,
