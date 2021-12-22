@@ -12,6 +12,7 @@ import { Button } from '../../atoms/Button';
 import baseUrl from '../../../utils/ApiUrl';
 import { ConvertAllCode, ConvertAllToNode, RunAssertions } from '../../../utils/shonagon';
 import { Modal } from '../../atoms/Modal';
+import DescAndUrl from '../../../models/DescAndUrl';
 
 type QuestionAnswerProps = {
   question: QuestionDetailResponse;
@@ -26,6 +27,7 @@ export const QuestionAnswer: VFC<QuestionAnswerProps> = (props: QuestionAnswerPr
   const [title, setTitle] = useState<string>('');
   const [detail, setDetail] = useState<string>('');
   const [open, setOpen] = useState(false);
+  const [urls, setUrls] = useState<DescAndUrl[]>([]);
   const handleClose = () => setOpen(false);
   const authUser = useAuthUser();
   const token = authUser?.accessToken;
@@ -37,8 +39,11 @@ export const QuestionAnswer: VFC<QuestionAnswerProps> = (props: QuestionAnswerPr
   }, [question.defaultCode]);
 
   const execute = () => {
-    setCorrects([]);
-    setResults([]);
+    // setCorrects([]);
+    // setResults([]);
+    // setTitle(``);
+    // setDetail('');
+    // setUrls([]);
     for (let index = 0; index < question.testCases.length; index += 1) {
       const args = question.testCases[index].input;
       try {
@@ -56,7 +61,6 @@ export const QuestionAnswer: VFC<QuestionAnswerProps> = (props: QuestionAnswerPr
     const newCode = ConvertAllCode(code) as string;
     const failedAssertions = RunAssertions(question, ConvertAllToNode(newCode)) as any[];
     const failedAssertionsId = failedAssertions.map((assertion) => assertion.id) as string[];
-
     if (failedAssertions.length) {
       const post: AnswerRequest = {
         questionID: question.questionID,
@@ -77,19 +81,20 @@ export const QuestionAnswer: VFC<QuestionAnswerProps> = (props: QuestionAnswerPr
       setResults([]);
       setTitle('失敗');
       const message = failedAssertions.map((j) => j.message).join('\n');
-      const tagUrlToName = new Map<string, string>();
-      const originalUrls = failedAssertions
-        .map((j) =>
-          j.tags.map((tag: { tutorial_link: string; name: string }) => {
-            tagUrlToName.set(tag.tutorial_link, tag.name);
-            return tag.tutorial_link;
-          })
-        )
-        .flat() as string[];
-      const urls = Array.from(new Set(originalUrls))
-        .map((u) => `\n    ${tagUrlToName.get(u)}: ${u}`)
-        .join('');
-      setDetail(`${message}\n\n再学習が必要そうな項目:${urls}`);
+      const tagUrlToName: DescAndUrl[] = [];
+      failedAssertions.forEach((j) =>
+        j.tags.forEach((tag: { tutorial_link: string; name: string }) => {
+          tagUrlToName.push({
+            desc: tag.name,
+            url: tag.tutorial_link,
+          });
+        })
+      );
+      const uniqueUrls = tagUrlToName.filter(
+        (element, index, self) => self.findIndex((e) => e.url === element.url) === index
+      );
+      setUrls(uniqueUrls);
+      setDetail(message);
     } else {
       const post: AnswerRequest = {
         questionID: question.questionID,
@@ -110,6 +115,7 @@ export const QuestionAnswer: VFC<QuestionAnswerProps> = (props: QuestionAnswerPr
       setResults([]);
       setTitle('成功');
       setDetail('');
+      setUrls([]);
     }
 
     setOpen(true);
@@ -131,7 +137,7 @@ export const QuestionAnswer: VFC<QuestionAnswerProps> = (props: QuestionAnswerPr
         <Button value="実行" onClick={execute} sx={{ marginBottom: 8 }} />
         <p>{results}</p>
       </Paper>
-      <Modal open={open} handleClose={handleClose} title={title} detail={detail} />
+      <Modal open={open} handleClose={handleClose} title={title} detail={detail} urls={urls} />
     </Container>
   );
 };
