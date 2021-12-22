@@ -1,4 +1,4 @@
-type Tag = {
+export type Tag = {
   id: string;
   name: string;
   tutorialLink: string;

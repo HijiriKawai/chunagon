@@ -1,3 +1,5 @@
+// eslint-disable-next-line eslint-comments/disable-enable-pair
+/* eslint-disable no-console */
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable @typescript-eslint/no-implied-eval */
 import axios from 'axios';
@@ -5,7 +7,7 @@ import { useEffect, useState, VFC } from 'react';
 import { Container, Paper, Typography } from '@mui/material';
 import { useHistory } from 'react-router-dom';
 import AnswerRequest from '../../../models/AnswerRequest';
-import { QuestionDetailResponse } from '../../../models/QuestionDetailResponse';
+import { QuestionDetailResponse, Tag } from '../../../models/QuestionDetailResponse';
 import { Editor } from '../../atoms/Editor';
 import { useAuthUser } from '../../../context/UserAuthContext';
 import { Button } from '../../atoms/Button';
@@ -33,29 +35,77 @@ export const QuestionAnswer: VFC<QuestionAnswerProps> = (props: QuestionAnswerPr
   const base = baseUrl();
   const url = `${base}/answer`;
 
+  const functionTag: Tag = {
+    id: '3b227f55-7e77-4d48-8dc7-011681229497',
+    name: '関数定義',
+    tutorialLink: 'https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Functions',
+  };
+
   useEffect(() => {
     setCode(question.defaultCode);
   }, [question.defaultCode]);
 
   const execute = () => {
-    for (let index = 0; index < question.testCases.length; index += 1) {
-      const args = question.testCases[index].input;
+    if (question.tags.some((tag) => tag.name === functionTag.name)) {
+      for (let index = 0; index < question.testCases.length; index += 1) {
+        const args = question.testCases[index].input;
+        try {
+          const executor = new Function(`return ${code}${args}`);
+          const result = executor();
+          console.log(result);
+          results.push(result);
+          if (`${result}` === question.testCases[index].expected) {
+            corrects.push(true);
+          }
+        } catch {
+          setCorrects([]);
+          setResults([]);
+        }
+      }
+    } else {
+      const { log } = console;
+      console.log = (v) => {
+        results.push(v);
+      };
       try {
-        const executor = new Function(`return ${code}${args}`);
-        const result = executor();
-        results.push(result);
-        if (`${result}` === question.testCases[index].expected) {
-          corrects.push(true);
+        // eslint-disable-next-line no-eval
+        eval(`console.log = (v) => {\nresults.push(v);\n};\n${code}`);
+        for (let index = 0; index < question.testCases.length; index += 1) {
+          if (results.join('\n') === question.testCases[index].expected) {
+            corrects.push(true);
+          }
         }
       } catch {
         setCorrects([]);
         setResults([]);
       }
+      console.log = log;
     }
     const newCode = ConvertAllCode(code) as string;
     const failedAssertions = RunAssertions(question, ConvertAllToNode(newCode)) as any[];
     const failedAssertionsId = failedAssertions.map((assertion) => assertion.id) as string[];
-    if (failedAssertions.length) {
+    if (failedAssertions.length === 0 && corrects.length === question.testCases.length) {
+      const post: AnswerRequest = {
+        questionID: question.questionID,
+        isCorrect: true,
+        failedAssertions: [],
+      };
+
+      axios
+        .post(url, JSON.stringify(post), {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        })
+        .then(() => {})
+        .catch(() => {});
+      setCorrects([]);
+      setResults([]);
+      setTitle('成功');
+      setDetail('');
+      setUrls([]);
+    } else {
       const post: AnswerRequest = {
         questionID: question.questionID,
         isCorrect: false,
@@ -89,29 +139,7 @@ export const QuestionAnswer: VFC<QuestionAnswerProps> = (props: QuestionAnswerPr
       );
       setUrls(uniqueUrls);
       setDetail(message);
-    } else {
-      const post: AnswerRequest = {
-        questionID: question.questionID,
-        isCorrect: true,
-        failedAssertions: [],
-      };
-
-      axios
-        .post(url, JSON.stringify(post), {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-        })
-        .then(() => {})
-        .catch(() => {});
-      setCorrects([]);
-      setResults([]);
-      setTitle('成功');
-      setDetail('');
-      setUrls([]);
     }
-
     setOpen(true);
   };
   return (
