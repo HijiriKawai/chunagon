@@ -25,7 +25,7 @@ export const Home: VFC = () => {
         setStatus('OK');
       })
       .catch(() => {
-        setStatus('Faild');
+        setStatus('Failed');
       });
   }, [token, url]);
 

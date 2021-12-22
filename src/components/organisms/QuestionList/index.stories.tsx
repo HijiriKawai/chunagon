@@ -32,9 +32,9 @@ Default.args = {
   ],
 };
 
-export const Faild = Template.bind({});
-Faild.args = {
-  status: 'Faild',
+export const Failed = Template.bind({});
+Failed.args = {
+  status: 'Failed',
   questions: [],
 };
 

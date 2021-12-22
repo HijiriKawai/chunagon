@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState, VFC } from 'react';
 import { useParams } from 'react-router-dom';
-import QuestionDtailResponse from '../../../models/QuestionDtailResponse';
+import { QuestionDetailResponse } from '../../../models/QuestionDetailResponse';
 import CommunicationStatus from '../../../utils/CommunicationStatusType';
 import { useAuthUser } from '../../../context/UserAuthContext';
 import { QuestionDetail } from '../../organisms/QuestionDetail';
@@ -12,13 +12,15 @@ type RouterParams = {
 };
 
 export const Question: VFC = () => {
-  const [question, setQuestion] = useState<QuestionDtailResponse>({
+  const [question, setQuestion] = useState<QuestionDetailResponse>({
     questionID: '',
     title: '',
     description: '',
     testCases: [],
     assertions: [],
     answeredCorrectly: false,
+    tags: [],
+    defaultCode: '',
   });
   const [status, setStatus] = useState<CommunicationStatus>('Loading');
   const { questionID } = useParams<RouterParams>();
@@ -28,7 +30,7 @@ export const Question: VFC = () => {
   const url = `${base}/question/${questionID}`;
   useEffect(() => {
     axios
-      .get<QuestionDtailResponse>(url, {
+      .get<QuestionDetailResponse>(url, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -38,7 +40,7 @@ export const Question: VFC = () => {
         setStatus('OK');
       })
       .catch(() => {
-        setStatus('Faild');
+        setStatus('Failed');
       });
   }, [token, url]);
 

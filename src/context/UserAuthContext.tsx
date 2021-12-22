@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FC, createContext, useContext, useState } from 'react';
+import { FC, createContext, useContext, useState, useEffect } from 'react';
 import { Redirect, useHistory } from 'react-router-dom';
 import ConfirmRequest from '../models/ConfirmRequest';
 import LoginRequest from '../models/LoginRequest';
@@ -33,6 +33,7 @@ const SignupOperationContext = createContext<SignupOperationType>({
 export const AuthUserProvider: FC = ({ children }) => {
   const [authUser, setAuthUser] = useState<LoginResponse | null>(null);
   const [signupUser, setSignupUser] = useState<SignupResponse | null>(null);
+  const [loading, setLoading] = useState(false);
   const history = useHistory();
   const base = baseUrl();
 
@@ -52,7 +53,7 @@ export const AuthUserProvider: FC = ({ children }) => {
         };
         setSignupUser(obj);
       })
-      .catch((Error) => {
+      .catch(() => {
         <Redirect to="/signup" />;
       });
   };
@@ -74,9 +75,10 @@ export const AuthUserProvider: FC = ({ children }) => {
           refreshToken: Response.data.refresh_token,
         };
         setAuthUser(obj);
+        localStorage.setItem('chunagon_auth', JSON.stringify(obj));
         history.push('/home');
       })
-      .catch((Response) => {
+      .catch(() => {
         <Redirect to="/signup" />;
       });
   };
@@ -97,9 +99,10 @@ export const AuthUserProvider: FC = ({ children }) => {
           refreshToken: Response.data.refresh_token,
         };
         setAuthUser(obj);
+        localStorage.setItem('chunagon_auth', JSON.stringify(obj));
         history.push('/home');
       })
-      .catch((Response) => {
+      .catch(() => {
         <Redirect to="/login" />;
       });
   };
@@ -111,22 +114,35 @@ export const AuthUserProvider: FC = ({ children }) => {
     params.append('grant_type', req.grant_type);
     params.append('refresh_token', req.refresh_token);
 
+    localStorage.removeItem('chunagon_auth');
     axios
       .post(url, params)
-      .then((Response) => {
+      .then(() => {
         setAuthUser(null);
         history.push('/');
       })
-      .catch((Response) => {
+      .catch(() => {
         <Redirect to="/home" />;
       });
   };
+
+  useEffect(() => {
+    setLoading(true);
+    const storageItem = localStorage.getItem('chunagon_auth');
+    if (storageItem != null) {
+      const obj: LoginResponse = JSON.parse(storageItem);
+      setAuthUser(obj);
+    }
+    setLoading(false);
+  }, []);
 
   return (
     <AuthOperationContext.Provider value={{ login, logout }}>
       <SignupOperationContext.Provider value={{ signup, confirm }}>
         <AuthUserContext.Provider value={authUser}>
-          <SignupUserContext.Provider value={signupUser}>{children}</SignupUserContext.Provider>
+          <SignupUserContext.Provider value={signupUser}>
+            {!loading && children}
+          </SignupUserContext.Provider>
         </AuthUserContext.Provider>
       </SignupOperationContext.Provider>
     </AuthOperationContext.Provider>

@@ -1,7 +1,7 @@
 import { VFC } from 'react';
 import QuestionsResponse from '../../../models/QuestionResponse';
 import CommunicationStatus from '../../../utils/CommunicationStatusType';
-import { FaildBox } from '../../molecules/FaildBox';
+import { FailedBox } from '../../molecules/FailedBox';
 import { LoadingBox } from '../../molecules/LoadingBox';
 import { QuestionsBox } from '../../molecules/QuestionsBox';
 
@@ -14,7 +14,7 @@ export const QuestionList: VFC<QuestionListProps> = (props: QuestionListProps) =
   const { status, questions } = props;
   const questionDetail = {
     OK: QuestionsBox,
-    Faild: FaildBox,
+    Failed: FailedBox,
     Loading: LoadingBox,
   };
 

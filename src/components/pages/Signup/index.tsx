@@ -5,10 +5,10 @@ import { SignupForm } from '../../molecules/SignupForm';
 
 export const Signup: VFC = () => {
   const signupUser = useSignupUser();
-  const isSignuped = signupUser != null;
+  const isSigned = signupUser != null;
   return (
     <>
-      {!isSignuped && <SignupForm />} {isSignuped && <ConfirmForm />}
+      {!isSigned && <SignupForm />} {isSigned && <ConfirmForm />}
     </>
   );
 };

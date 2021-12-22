@@ -1,8 +1,8 @@
 import { Box, Container, Paper } from '@mui/material';
 import { VFC } from 'react';
-import { Faild } from '../../atoms/Faild';
+import { Failed } from '../../atoms/Failed';
 
-export const FaildBox: VFC = () => {
+export const FailedBox: VFC = () => {
   return (
     <Container component="main">
       <Paper
@@ -21,7 +21,7 @@ export const FaildBox: VFC = () => {
             alignItems: 'center',
           }}
         >
-          <Faild />
+          <Failed />
         </Box>
       </Paper>
     </Container>

@@ -1,3 +1,3 @@
-type CommunicationStatus = 'OK' | 'Faild' | 'Loading';
+type CommunicationStatus = 'OK' | 'Failed' | 'Loading';
 
 export default CommunicationStatus;
