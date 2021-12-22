@@ -75,6 +75,7 @@ export const AuthUserProvider: FC = ({ children }) => {
           refreshToken: Response.data.refresh_token,
         };
         setAuthUser(obj);
+        localStorage.setItem('chunagon_auth', JSON.stringify(obj));
         history.push('/home');
       })
       .catch(() => {
@@ -113,6 +114,7 @@ export const AuthUserProvider: FC = ({ children }) => {
     params.append('grant_type', req.grant_type);
     params.append('refresh_token', req.refresh_token);
 
+    localStorage.removeItem('chunagon_auth');
     axios
       .post(url, params)
       .then(() => {
