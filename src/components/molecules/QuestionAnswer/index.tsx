@@ -36,11 +36,9 @@ export const QuestionAnswer: VFC<QuestionAnswerProps> = (props: QuestionAnswerPr
     setCode(question.defaultCode);
   }, [question.defaultCode]);
 
-  const backHome = () => {
-    history.push('/Home');
-  };
-
   const execute = () => {
+    setCorrects([]);
+    setResults([]);
     for (let index = 0; index < question.testCases.length; index += 1) {
       const args = question.testCases[index].input;
       try {
@@ -127,7 +125,6 @@ export const QuestionAnswer: VFC<QuestionAnswerProps> = (props: QuestionAnswerPr
           alignItems: 'center',
         }}
       >
-        <Button value="戻る" onClick={backHome} />
         <Typography variant="h3">{question.title}</Typography>
         <Typography variant="subtitle1">{question.description}</Typography>
         <Editor theme="solarized_dark" fontsize={14} value={code} onChange={setCode} />

@@ -52,7 +52,10 @@ export const Header: VFC = () => {
             paddingRight: 4,
           }}
         >
-          <Typography variant="h3">chunagon</Typography>
+          <Stack direction="row" justifyContent="center" alignItems="center" spacing={2}>
+            <Typography variant="h3">chunagon</Typography>
+            <StyledLink to="/home">home</StyledLink>
+          </Stack>
           {!isAuthenticated && (
             <Stack direction="row" justifyContent="center" alignItems="center" spacing={2}>
               <StyledLink to="/signup">新規登録</StyledLink>
