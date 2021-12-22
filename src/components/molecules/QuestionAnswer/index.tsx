@@ -20,7 +20,6 @@ type QuestionAnswerProps = {
 
 export const QuestionAnswer: VFC<QuestionAnswerProps> = (props: QuestionAnswerProps) => {
   const { question } = props;
-  const history = useHistory();
   const [code, setCode] = useState<string>('');
   const [corrects, setCorrects] = useState<boolean[]>([]);
   const [results, setResults] = useState<any[]>([]);
@@ -39,11 +38,6 @@ export const QuestionAnswer: VFC<QuestionAnswerProps> = (props: QuestionAnswerPr
   }, [question.defaultCode]);
 
   const execute = () => {
-    // setCorrects([]);
-    // setResults([]);
-    // setTitle(``);
-    // setDetail('');
-    // setUrls([]);
     for (let index = 0; index < question.testCases.length; index += 1) {
       const args = question.testCases[index].input;
       try {
