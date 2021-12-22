@@ -21,6 +21,7 @@ const style: SxProps<Theme> = {
   boxShadow: 24,
   p: 4,
   whiteSpace: 'pre-wrap',
+  overflowWrap: 'break-word',
 };
 
 export const Modal: VFC<ModalProps> = (props: ModalProps) => {
