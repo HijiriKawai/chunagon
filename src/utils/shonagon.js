@@ -264,19 +264,19 @@ function ConvertAllToNode(code) {
   return convertAll(Parser.parse(code, { ranges: false }));
 }
 
-function RunAssertions(assertions, node_) {
+function RunAssertions(question, node_) {
   const failure = [];
-  assertions.assertions.forEach((assertion) => {
-    if (typeof assertion.assertion === 'string')
-      assertion.assertion = JSON.parse(assertion.assertion);
+  const parsedAssertions = [];
+  question.assertions.forEach((assertion) => {
+    parsedAssertions.push({ ...assertion, assertion: JSON.parse(assertion.assertion) });
   });
   const nodes = new NodeWalker().walkNode(node_);
   nodes.forEach((node) => {
-    assertions.assertions.forEach((assertion) => {
+    parsedAssertions.forEach((assertion) => {
       RecursiveCompare(assertion.assertion, node);
     });
   });
-  assertions.assertions.forEach((assertion) => {
+  parsedAssertions.forEach((assertion) => {
     RecursiveDetermine(assertion.assertion);
     if (
       assertion.assertion.matched === false ||
@@ -285,7 +285,6 @@ function RunAssertions(assertions, node_) {
       failure.push(assertion);
     }
   });
-
   return failure;
 }
 
