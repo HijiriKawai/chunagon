@@ -5,7 +5,6 @@
 import axios from 'axios';
 import { useEffect, useState, VFC } from 'react';
 import { Container, Paper, Typography } from '@mui/material';
-import { useHistory } from 'react-router-dom';
 import AnswerRequest from '../../../models/AnswerRequest';
 import { QuestionDetailResponse, Tag } from '../../../models/QuestionDetailResponse';
 import { Editor } from '../../atoms/Editor';
@@ -52,7 +51,6 @@ export const QuestionAnswer: VFC<QuestionAnswerProps> = (props: QuestionAnswerPr
         try {
           const executor = new Function(`return ${code}${args}`);
           const result = executor();
-          console.log(result);
           results.push(result);
           if (`${result}` === question.testCases[index].expected) {
             corrects.push(true);
@@ -156,7 +154,7 @@ export const QuestionAnswer: VFC<QuestionAnswerProps> = (props: QuestionAnswerPr
         <Typography variant="h3">{question.title}</Typography>
         <Typography variant="subtitle1">{question.description}</Typography>
         <Editor theme="solarized_dark" fontsize={14} value={code} onChange={setCode} />
-        <Button value="実行" onClick={execute} sx={{ marginBottom: 8 }} />
+        <Button value="実行" onClick={execute} sx={{ marginTop: 2, marginBottom: 8 }} />
         <p>{results}</p>
       </Paper>
       <Modal open={open} handleClose={handleClose} title={title} detail={detail} urls={urls} />

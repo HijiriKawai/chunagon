@@ -46,7 +46,7 @@ function App() {
         <Wrapper>
           <Header />
           <Switch>
-            <Route exact path="/" component={Top} />
+            <UnAuthRoute exact path="/" component={Top} />
             <UnAuthRoute exact path="/login" component={Login} />
             <UnAuthRoute exact path="/signup" component={Signup} />
             <PrivateRoute exact path="/home" component={Home} />
