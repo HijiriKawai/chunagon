@@ -1,7 +1,7 @@
 import { VFC } from 'react';
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
-import { Stack, Typography } from '@mui/material';
+import { Link as MuiLink, Stack, Typography } from '@mui/material';
 import { useAuthUser, useLogout } from '../../../context/UserAuthContext';
 import { Button } from '../../atoms/Button';
 import LogoutRequest from '../../../models/LogoutRequest';
@@ -49,7 +49,16 @@ export const Header: VFC = () => {
           }}
         >
           <Stack direction="row" justifyContent="center" alignItems="center" spacing={2}>
-            <Typography variant="h3">chunagon</Typography>
+            <MuiLink
+              variant="h3"
+              underline="none"
+              href="/"
+              sx={{
+                color: '#000',
+              }}
+            >
+              chunagon
+            </MuiLink>
             <StyledLink to="/home">home</StyledLink>
           </Stack>
           {!isAuthenticated && (
