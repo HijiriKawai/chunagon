@@ -14,11 +14,11 @@ const SignupUserContext = createContext<SignupResponse | null>(null);
 
 type OperationType = {
   login: (req: LoginRequest) => void;
-  logout: (req: LogoutRequest) => void;
+  logout: () => void;
 };
 const AuthOperationContext = createContext<OperationType>({
   login: (_) => {},
-  logout: (_) => {},
+  logout: () => {},
 });
 
 type SignupOperationType = {
@@ -107,23 +107,9 @@ export const AuthUserProvider: FC = ({ children }) => {
       });
   };
 
-  const logout = async (req: LogoutRequest) => {
-    const url = `${base}/login`;
-    const params = new URLSearchParams();
-
-    params.append('grant_type', req.grant_type);
-    params.append('refresh_token', req.refresh_token);
-
+  const logout = () => {
     localStorage.removeItem('chunagon_auth');
-    axios
-      .post(url, params)
-      .then(() => {
-        setAuthUser(null);
-        history.push('/');
-      })
-      .catch(() => {
-        <Redirect to="/home" />;
-      });
+    setAuthUser(null);
   };
 
   useEffect(() => {

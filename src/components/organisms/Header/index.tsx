@@ -32,11 +32,7 @@ export const Header: VFC = () => {
 
   const handleLogout = () => {
     if (authUser) {
-      const req: LogoutRequest = {
-        grant_type: 'refresh_token',
-        refresh_token: authUser.refreshToken,
-      };
-      logout(req);
+      logout();
     }
   };
 
