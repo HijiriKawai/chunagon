@@ -18,7 +18,7 @@ module.exports = {
     'jsx-a11y',
     'prettier',
     'unused-imports',
-    'simple-import-sort',
+    'import',
   ],
   env: {
     es6: true,
@@ -87,6 +87,23 @@ module.exports = {
       'warn',
       { vars: 'all', varsIgnorePattern: '^_', args: 'after-used', argsIgnorePattern: '^_' },
     ],
+    'import/order': [
+      'error',
+      {
+        groups: ['builtin', 'external', 'parent', 'sibling', 'index', 'object', 'type'],
+        pathGroups: [
+          {
+            pattern: '@alias/**',
+            group: 'parent',
+            position: 'before',
+          },
+        ],
+        alphabetize: {
+          order: 'asc',
+        },
+        'newlines-between': 'always',
+      },
+    ],
     'import/default': 'error',
     'import/extensions': [
       'error',
@@ -126,8 +143,6 @@ module.exports = {
       },
     ],
     'import/prefer-default-export': 'off',
-    'simple-import-sort/imports': 'error',
-    'simple-import-sort/exports': 'error',
     'json/*': ['error', 'allowComments'],
     'jsx-a11y/accessible-emoji': 'off',
     'jsx-a11y/anchor-is-valid': [
