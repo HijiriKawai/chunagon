@@ -9,7 +9,17 @@ module.exports = {
     'plugin:react-hooks/recommended',
     'plugin:prettier/recommended',
   ],
-  plugins: ['progress', '@typescript-eslint', 'import', 'json', 'html', 'jsx-a11y', 'prettier'],
+  plugins: [
+    'progress',
+    '@typescript-eslint',
+    'import',
+    'json',
+    'html',
+    'jsx-a11y',
+    'prettier',
+    'unused-imports',
+    'simple-import-sort',
+  ],
   env: {
     es6: true,
     'jest/globals': true,
@@ -72,6 +82,11 @@ module.exports = {
     '@typescript-eslint/no-var-requires': 'off',
     'progress/activate': 1,
     'class-methods-use-this': 'off',
+    'unused-imports/no-unused-imports': 'error',
+    'unused-imports/no-unused-vars': [
+      'warn',
+      { vars: 'all', varsIgnorePattern: '^_', args: 'after-used', argsIgnorePattern: '^_' },
+    ],
     'import/default': 'error',
     'import/extensions': [
       'error',
@@ -111,6 +126,8 @@ module.exports = {
       },
     ],
     'import/prefer-default-export': 'off',
+    'simple-import-sort/imports': 'error',
+    'simple-import-sort/exports': 'error',
     'json/*': ['error', 'allowComments'],
     'jsx-a11y/accessible-emoji': 'off',
     'jsx-a11y/anchor-is-valid': [

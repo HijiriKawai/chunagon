@@ -1,10 +1,10 @@
-import { VFC } from 'react';
 import styled from '@emotion/styled';
+import { Link as MuiLink, Stack } from '@mui/material';
+import { VFC } from 'react';
 import { Link } from 'react-router-dom';
-import { Link as MuiLink, Stack, Typography } from '@mui/material';
+
 import { useAuthUser, useLogout } from '../../../context/UserAuthContext';
 import { Button } from '../../atoms/Button';
-import LogoutRequest from '../../../models/LogoutRequest';
 
 const StyledHeader = styled.header`
   background-color: white;

@@ -1,9 +1,10 @@
 import { VFC } from 'react';
+
 import { QuestionDetailResponse } from '../../../models/QuestionDetailResponse';
-import { QuestionAnswer } from '../../molecules/QuestionAnswer';
 import CommunicationStatus from '../../../utils/CommunicationStatusType';
 import { FailedBox } from '../../molecules/FailedBox';
 import { LoadingBox } from '../../molecules/LoadingBox';
+import { QuestionAnswer } from '../../molecules/QuestionAnswer';
 
 type QuestionDetailProps = {
   status: CommunicationStatus;

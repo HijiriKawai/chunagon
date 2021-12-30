@@ -2,18 +2,19 @@
 /* eslint-disable no-console */
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable @typescript-eslint/no-implied-eval */
+import { Container, Paper, Typography } from '@mui/material';
 import axios from 'axios';
 import { useEffect, useState, VFC } from 'react';
-import { Container, Paper, Typography } from '@mui/material';
-import AnswerRequest from '../../../models/AnswerRequest';
-import { QuestionDetailResponse, Tag } from '../../../models/QuestionDetailResponse';
-import { Editor } from '../../atoms/Editor';
+
 import { useAuthUser } from '../../../context/UserAuthContext';
-import { Button } from '../../atoms/Button';
+import AnswerRequest from '../../../models/AnswerRequest';
+import DescAndUrl from '../../../models/DescAndUrl';
+import { QuestionDetailResponse, Tag } from '../../../models/QuestionDetailResponse';
 import baseUrl from '../../../utils/ApiUrl';
 import { ConvertAllCode, ConvertAllToNode, RunAssertions } from '../../../utils/shonagon';
+import { Button } from '../../atoms/Button';
+import { Editor } from '../../atoms/Editor';
 import { Modal } from '../../atoms/Modal';
-import DescAndUrl from '../../../models/DescAndUrl';
 
 type QuestionAnswerProps = {
   question: QuestionDetailResponse;

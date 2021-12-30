@@ -1,5 +1,5 @@
-import { VFC } from 'react';
 import { Typography } from '@mui/material';
+import { VFC } from 'react';
 
 export const Failed: VFC = () => {
   return (

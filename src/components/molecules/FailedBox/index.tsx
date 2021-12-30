@@ -1,5 +1,6 @@
 import { Box, Container, Paper } from '@mui/material';
 import { VFC } from 'react';
+
 import { Failed } from '../../atoms/Failed';
 
 export const FailedBox: VFC = () => {

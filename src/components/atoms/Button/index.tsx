@@ -1,6 +1,6 @@
-import { MouseEventHandler, VFC } from 'react';
 import { Button as MUIButton, Theme } from '@mui/material';
 import { SxProps } from '@mui/system';
+import { MouseEventHandler, VFC } from 'react';
 
 type ButtonProps = {
   value: string;

@@ -1,8 +1,8 @@
-import styled from '@emotion/styled';
 import { Box, Modal as MUIModal, Typography } from '@mui/material';
 import { SxProps, Theme } from '@mui/system';
 import { VFC } from 'react';
 import { Link } from 'react-router-dom';
+
 import DescAndUrl from '../../../models/DescAndUrl';
 
 type ModalProps = {

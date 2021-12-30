@@ -1,5 +1,5 @@
-import { VFC } from 'react';
 import styled from '@emotion/styled';
+import { VFC } from 'react';
 import { Link } from 'react-router-dom';
 
 const StyledFooter = styled.footer`

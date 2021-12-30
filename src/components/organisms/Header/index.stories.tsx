@@ -1,5 +1,5 @@
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 import { MemoryRouter } from 'react-router-dom';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { Header } from './index';
 

@@ -1,11 +1,12 @@
 import axios from 'axios';
 import { useEffect, useState, VFC } from 'react';
 import { useParams } from 'react-router-dom';
-import { QuestionDetailResponse } from '../../../models/QuestionDetailResponse';
-import CommunicationStatus from '../../../utils/CommunicationStatusType';
+
 import { useAuthUser } from '../../../context/UserAuthContext';
-import { QuestionDetail } from '../../organisms/QuestionDetail';
+import { QuestionDetailResponse } from '../../../models/QuestionDetailResponse';
 import baseUrl from '../../../utils/ApiUrl';
+import CommunicationStatus from '../../../utils/CommunicationStatusType';
+import { QuestionDetail } from '../../organisms/QuestionDetail';
 
 type RouterParams = {
   questionID: string;

@@ -1,5 +1,6 @@
 import { Box, Container, Paper } from '@mui/material';
 import { VFC } from 'react';
+
 import { Loading } from '../../atoms/Loading';
 
 export const LoadingBox: VFC = () => {

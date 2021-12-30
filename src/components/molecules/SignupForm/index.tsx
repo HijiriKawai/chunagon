@@ -1,10 +1,11 @@
 import { Container, Paper, Theme, Typography } from '@mui/material';
 import { SxProps } from '@mui/system';
 import { useState, VFC } from 'react';
+
+import { useSignup } from '../../../context/UserAuthContext';
 import SignupRequest from '../../../models/SignupRequest';
 import { Button } from '../../atoms/Button';
 import { FormInput } from '../../atoms/FormInput';
-import { useSignup } from '../../../context/UserAuthContext';
 
 const buttonStyle: SxProps<Theme> = {
   marginBottom: 8,
