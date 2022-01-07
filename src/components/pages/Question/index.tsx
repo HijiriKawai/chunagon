@@ -2,7 +2,6 @@ import axios from 'axios';
 import { useEffect, useState, VFC } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { useAuthUser } from '../../../context/UserAuthContext';
 import { QuestionDetailResponse } from '../../../models/QuestionDetailResponse';
 import baseUrl from '../../../utils/ApiUrl';
 import CommunicationStatus from '../../../utils/CommunicationStatusType';
@@ -22,20 +21,15 @@ export const Question: VFC = () => {
     answeredCorrectly: false,
     tags: [],
     defaultCode: '',
+    level: 0,
   });
   const [status, setStatus] = useState<CommunicationStatus>('Loading');
   const { questionID } = useParams<RouterParams>();
-  const authUser = useAuthUser();
-  const token = authUser?.accessToken;
   const base = baseUrl();
   const url = `${base}/question/${questionID}`;
   useEffect(() => {
     axios
-      .get<QuestionDetailResponse>(url, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
+      .get<QuestionDetailResponse>(url)
       .then((Response) => {
         setQuestion(Response.data);
         setStatus('OK');
@@ -43,7 +37,7 @@ export const Question: VFC = () => {
       .catch(() => {
         setStatus('Failed');
       });
-  }, [token, url]);
+  }, [url]);
 
   return <QuestionDetail status={status} question={question} />;
 };

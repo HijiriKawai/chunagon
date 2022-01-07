@@ -82,6 +82,7 @@ Default.args = {
       },
     ],
     defaultCode: 'function add(first, second) {\n    // your code here\n\n}',
+    level: 1,
   },
 };
 
@@ -97,6 +98,7 @@ Faild.args = {
     answeredCorrectly: false,
     tags: [],
     defaultCode: '',
+    level: 1,
   },
 };
 
@@ -112,5 +114,6 @@ Loading.args = {
     answeredCorrectly: false,
     tags: [],
     defaultCode: '',
+    level: 2,
   },
 };

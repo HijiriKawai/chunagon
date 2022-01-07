@@ -3,9 +3,6 @@ import { Link as MuiLink, Stack } from '@mui/material';
 import { VFC } from 'react';
 import { Link } from 'react-router-dom';
 
-import { useAuthUser, useLogout } from '../../../context/UserAuthContext';
-import { Button } from '../../atoms/Button';
-
 const StyledHeader = styled.header`
   background-color: white;
 `;
@@ -26,16 +23,6 @@ const StyledLink = styled(Link)`
 `;
 
 export const Header: VFC = () => {
-  const authUser = useAuthUser();
-  const isAuthenticated = authUser != null;
-  const logout = useLogout();
-
-  const handleLogout = () => {
-    if (authUser) {
-      logout();
-    }
-  };
-
   return (
     <>
       <StyledHeader>
@@ -61,13 +48,6 @@ export const Header: VFC = () => {
             </MuiLink>
             <StyledLink to="/home">home</StyledLink>
           </Stack>
-          {!isAuthenticated && (
-            <Stack direction="row" justifyContent="center" alignItems="center" spacing={2}>
-              <StyledLink to="/signup">新規登録</StyledLink>
-              <StyledLink to="/login">ログイン</StyledLink>
-            </Stack>
-          )}
-          {isAuthenticated && <Button value="ログアウト" onClick={handleLogout} />}
         </Stack>
       </StyledHeader>
       <UnderLine />

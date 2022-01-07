@@ -1,33 +1,12 @@
 import styled from '@emotion/styled';
-import { BrowserRouter, Redirect, Route, RouteProps, Switch } from 'react-router-dom';
+import axios from 'axios';
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 
 import { Footer } from './components/organisms/Footer';
 import { Header } from './components/organisms/Header';
 import { Home } from './components/pages/Home';
-import { Login } from './components/pages/Login';
 import { Question } from './components/pages/Question';
-import { Signup } from './components/pages/Signup';
 import { Top } from './components/pages/Top';
-import { AuthUserProvider, useAuthUser } from './context/UserAuthContext';
-
-const UnAuthRoute: React.FC<RouteProps> = ({ ...props }) => {
-  const authUser = useAuthUser();
-  const isAuthenticated = authUser != null;
-
-  if (isAuthenticated) {
-    return <Redirect to="/home" />;
-  }
-  return <Route {...props} />;
-};
-
-const PrivateRoute: React.FC<RouteProps> = ({ ...props }) => {
-  const authUser = useAuthUser();
-  const isAuthenticated = authUser != null;
-  if (isAuthenticated) {
-    return <Route {...props} />;
-  }
-  return <Redirect to={{ pathname: '/login', state: { from: props.location?.pathname } }} />;
-};
 
 const Wrapper = styled.div`
   min-height: 100vh;
@@ -41,23 +20,21 @@ const Wrapper = styled.div`
 `;
 
 function App() {
+  axios.defaults.withCredentials = true;
+
   return (
-    <AuthUserProvider>
-      <BrowserRouter>
-        <Wrapper>
-          <Header />
-          <Switch>
-            <UnAuthRoute exact path="/" component={Top} />
-            <UnAuthRoute exact path="/login" component={Login} />
-            <UnAuthRoute exact path="/signup" component={Signup} />
-            <PrivateRoute exact path="/home" component={Home} />
-            <PrivateRoute exact path="/question/:questionID" component={Question} />
-            <Redirect to="/" />
-          </Switch>
-          <Footer />
-        </Wrapper>
-      </BrowserRouter>
-    </AuthUserProvider>
+    <BrowserRouter>
+      <Wrapper>
+        <Header />
+        <Switch>
+          <Route exact path="/" component={Top} />
+          <Route exact path="/home" component={Home} />
+          <Route exact path="/question/:questionID" component={Question} />
+          <Redirect to="/" />
+        </Switch>
+        <Footer />
+      </Wrapper>
+    </BrowserRouter>
   );
 }
 

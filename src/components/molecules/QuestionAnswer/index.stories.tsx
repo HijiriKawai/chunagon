@@ -81,5 +81,6 @@ Default.args = {
       },
     ],
     defaultCode: 'function add(first, second) {\n    // your code here\n\n}',
+    level: 1,
   },
 };

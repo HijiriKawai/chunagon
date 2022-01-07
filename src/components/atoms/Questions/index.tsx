@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
 import { CheckBox, CheckBoxOutlineBlank } from '@mui/icons-material';
+import { Typography } from '@mui/material';
 import { VFC } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -44,6 +45,9 @@ const StyledLink = styled(Link)`
 export const Questions: VFC<QuestionsProps> = (props: QuestionsProps) => {
   const { questions } = props;
   const items = questions.map((question) => {
+    const tagsText = question.tags.map((tag) => {
+      return <Typography key={tag.id}>{tag.name}</Typography>;
+    });
     return (
       <StyledTr key={question.questionID}>
         <StyledTd>
@@ -53,6 +57,8 @@ export const Questions: VFC<QuestionsProps> = (props: QuestionsProps) => {
           {question.answeredCorrectly && <CheckBox />}
           {!question.answeredCorrectly && <CheckBoxOutlineBlank />}
         </StyledTd>
+        <StyledTd>{tagsText}</StyledTd>
+        <StyledTd>{question.level}</StyledTd>
       </StyledTr>
     );
   });
@@ -62,6 +68,8 @@ export const Questions: VFC<QuestionsProps> = (props: QuestionsProps) => {
         <tr>
           <StyledTh>問題名</StyledTh>
           <StyledTh>回答</StyledTh>
+          <StyledTh>タグ</StyledTh>
+          <StyledTh>レベル</StyledTh>
         </tr>
       </thead>
       <tbody>{items}</tbody>

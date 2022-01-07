@@ -21,11 +21,15 @@ Default.args = {
       questionID: '1',
       title: 'title1',
       answeredCorrectly: true,
+      tags: [],
+      level: 1,
     },
     {
       questionID: '2',
       title: 'title2',
       answeredCorrectly: false,
+      tags: [],
+      level: 2,
     },
   ],
 };

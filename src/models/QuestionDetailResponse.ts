@@ -25,4 +25,5 @@ export type QuestionDetailResponse = {
   testCases: TestCase[];
   assertions: Assertion[];
   answeredCorrectly: boolean;
+  level: number;
 };

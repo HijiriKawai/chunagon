@@ -6,7 +6,6 @@ import { Container, Paper, Typography } from '@mui/material';
 import axios from 'axios';
 import { useEffect, useState, VFC } from 'react';
 
-import { useAuthUser } from '../../../context/UserAuthContext';
 import AnswerRequest from '../../../models/AnswerRequest';
 import DescAndUrl from '../../../models/DescAndUrl';
 import { QuestionDetailResponse, Tag } from '../../../models/QuestionDetailResponse';
@@ -30,8 +29,6 @@ export const QuestionAnswer: VFC<QuestionAnswerProps> = (props: QuestionAnswerPr
   const [open, setOpen] = useState(false);
   const [urls, setUrls] = useState<DescAndUrl[]>([]);
   const handleClose = () => setOpen(false);
-  const authUser = useAuthUser();
-  const token = authUser?.accessToken;
   const base = baseUrl();
   const url = `${base}/answer`;
 
@@ -93,7 +90,6 @@ export const QuestionAnswer: VFC<QuestionAnswerProps> = (props: QuestionAnswerPr
       axios
         .post(url, JSON.stringify(post), {
           headers: {
-            Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
           },
         })
@@ -114,7 +110,6 @@ export const QuestionAnswer: VFC<QuestionAnswerProps> = (props: QuestionAnswerPr
       axios
         .post(url, JSON.stringify(post), {
           headers: {
-            Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
           },
         })
