@@ -1,6 +1,7 @@
 type AnswerRequest = {
   questionID: string;
   isCorrect: boolean;
+  isAssertionUsed: boolean;
   failedAssertions: string[];
 };
 

@@ -84,6 +84,7 @@ export const QuestionAnswer: VFC<QuestionAnswerProps> = (props: QuestionAnswerPr
       const post: AnswerRequest = {
         questionID: question.questionID,
         isCorrect: true,
+        isAssertionUsed: true,
         failedAssertions: [],
       };
 
@@ -105,6 +106,7 @@ export const QuestionAnswer: VFC<QuestionAnswerProps> = (props: QuestionAnswerPr
       const post: AnswerRequest = {
         questionID: question.questionID,
         isCorrect: false,
+        isAssertionUsed: true,
         failedAssertions: failedAssertionsId,
       };
 
