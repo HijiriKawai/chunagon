@@ -90,7 +90,7 @@ export const QuestionAnswer: VFC<QuestionAnswerProps> = (props: QuestionAnswerPr
 
       axios
         .post(url, JSON.stringify(post), {
-          withCredentials: true,
+          withCredentials: false,
           headers: {
             'Content-Type': 'application/json',
           },
@@ -112,7 +112,7 @@ export const QuestionAnswer: VFC<QuestionAnswerProps> = (props: QuestionAnswerPr
 
       axios
         .post(url, JSON.stringify(post), {
-          withCredentials: true,
+          withCredentials: false,
           headers: {
             'Content-Type': 'application/json',
           },
