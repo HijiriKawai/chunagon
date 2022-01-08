@@ -29,7 +29,7 @@ export const Question: VFC = () => {
   const url = `${base}/question/${questionID}`;
   useEffect(() => {
     axios
-      .get<QuestionDetailResponse>(url)
+      .get<QuestionDetailResponse>(url, { withCredentials: true })
       .then((Response) => {
         setQuestion(Response.data);
         setStatus('OK');

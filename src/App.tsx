@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import axios from 'axios';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 
 import { Footer } from './components/organisms/Footer';
@@ -20,8 +19,6 @@ const Wrapper = styled.div`
 `;
 
 function App() {
-  axios.defaults.withCredentials = true;
-
   return (
     <BrowserRouter>
       <Wrapper>
