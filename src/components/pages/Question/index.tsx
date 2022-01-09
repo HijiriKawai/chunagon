@@ -31,7 +31,7 @@ export const Question: VFC = () => {
   if (storageItem != null) {
     token = JSON.parse(storageItem);
   }
-  const url = `${base}/question/${questionID}?=${token}`;
+  const url = `${base}/question/${questionID}?token=${token}`;
   useEffect(() => {
     axios
       .get<QuestionDetailResponse>(url, { withCredentials: true })
