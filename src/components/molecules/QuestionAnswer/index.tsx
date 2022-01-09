@@ -30,7 +30,12 @@ export const QuestionAnswer: VFC<QuestionAnswerProps> = (props: QuestionAnswerPr
   const [urls, setUrls] = useState<DescAndUrl[]>([]);
   const handleClose = () => setOpen(false);
   const base = baseUrl();
-  const url = `${base}/answer`;
+  const storageItem = localStorage.getItem('chunagon_auth');
+  let token = '';
+  if (storageItem != null) {
+    token = JSON.parse(storageItem);
+  }
+  const url = `${base}/answer?token=${token}`;
 
   const functionTag: Tag = {
     id: '3b227f55-7e77-4d48-8dc7-011681229497',
