@@ -10,7 +10,12 @@ export const Home: VFC = () => {
   const [questions, setQuestions] = useState<Question[]>([]);
   const [status, setStatus] = useState<CommunicationStatus>('Loading');
   const base = baseUrl();
-  const url = `${base}/question`;
+  const storageItem = localStorage.getItem('chunagon_auth');
+  let token = '';
+  if (storageItem != null) {
+    token = JSON.parse(storageItem);
+  }
+  const url = `${base}/question?token=${token}`;
   useEffect(() => {
     axios
       .get<QuestionsResponse>(url, { withCredentials: true })
