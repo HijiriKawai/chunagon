@@ -26,7 +26,12 @@ export const Question: VFC = () => {
   const [status, setStatus] = useState<CommunicationStatus>('Loading');
   const { questionID } = useParams<RouterParams>();
   const base = baseUrl();
-  const url = `${base}/question/${questionID}`;
+  const storageItem = localStorage.getItem('chunagon_auth');
+  let token = '';
+  if (storageItem != null) {
+    token = JSON.parse(storageItem);
+  }
+  const url = `${base}/question/${questionID}?=${token}`;
   useEffect(() => {
     axios
       .get<QuestionDetailResponse>(url, { withCredentials: true })

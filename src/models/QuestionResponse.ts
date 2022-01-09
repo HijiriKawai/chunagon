@@ -1,6 +1,6 @@
 import { Tag } from './QuestionDetailResponse';
 
-type Question = {
+export type Question = {
   questionID: string;
   title: string;
   answeredCorrectly: boolean;
@@ -8,6 +8,9 @@ type Question = {
   level: number;
 };
 
-type QuestionsResponse = Question[];
+type QuestionsResponse = {
+  token: string;
+  questions: Question[];
+};
 
 export default QuestionsResponse;

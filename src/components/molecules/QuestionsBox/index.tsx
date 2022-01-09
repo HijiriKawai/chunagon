@@ -1,11 +1,11 @@
 import { Container, Paper } from '@mui/material';
 import { VFC } from 'react';
 
-import QuestionsResponse from '../../../models/QuestionResponse';
+import { Question } from '../../../models/QuestionResponse';
 import { Questions } from '../../atoms/Questions';
 
 type QuestionsBoxProps = {
-  questions: QuestionsResponse;
+  questions: Question[];
 };
 
 export const QuestionsBox: VFC<QuestionsBoxProps> = (props: QuestionsBoxProps) => {

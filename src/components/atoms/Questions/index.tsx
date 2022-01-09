@@ -4,10 +4,10 @@ import { Typography } from '@mui/material';
 import { VFC } from 'react';
 import { Link } from 'react-router-dom';
 
-import QuestionsResponse from '../../../models/QuestionResponse';
+import { Question } from '../../../models/QuestionResponse';
 
 type QuestionsProps = {
-  questions: QuestionsResponse;
+  questions: Question[];
 };
 
 const StyledTable = styled.table`
