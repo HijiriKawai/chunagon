@@ -20,7 +20,11 @@ export const Home: VFC = () => {
     axios
       .get<QuestionsResponse>(url, { withCredentials: true })
       .then((Response) => {
-        setQuestions(Response.data.questions);
+        setQuestions(
+          Response.data.questions.sort((a, b) => {
+            return a.level - b.level;
+          })
+        );
         localStorage.setItem('chunagon_auth', JSON.stringify(Response.data.token));
         setStatus('OK');
       })

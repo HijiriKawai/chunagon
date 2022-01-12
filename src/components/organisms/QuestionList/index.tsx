@@ -13,9 +13,6 @@ type QuestionListProps = {
 
 export const QuestionList: VFC<QuestionListProps> = (props: QuestionListProps) => {
   const { status, questions } = props;
-  questions.sort((a, b) => {
-    return a.level - b.level;
-  });
   const questionDetail = {
     OK: QuestionsBox,
     Failed: FailedBox,
