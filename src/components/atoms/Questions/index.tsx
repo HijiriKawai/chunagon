@@ -44,24 +44,28 @@ const StyledLink = styled(Link)`
 
 export const Questions: VFC<QuestionsProps> = (props: QuestionsProps) => {
   const { questions } = props;
-  const items = questions.map((question) => {
-    const tagsText = question.tags.map((tag) => {
-      return <Typography key={tag.id}>{tag.name}</Typography>;
+  const items = questions
+    .sort((a, b) => {
+      return a.level - b.level;
+    })
+    .map((question) => {
+      const tagsText = question.tags.map((tag) => {
+        return <Typography key={tag.id}>{tag.name}</Typography>;
+      });
+      return (
+        <StyledTr key={question.questionID}>
+          <StyledTd>
+            <StyledLink to={`question/${question.questionID}`}>{question.title}</StyledLink>
+          </StyledTd>
+          <StyledTd>
+            {question.answeredCorrectly && <CheckBox />}
+            {!question.answeredCorrectly && <CheckBoxOutlineBlank />}
+          </StyledTd>
+          <StyledTd>{tagsText}</StyledTd>
+          <StyledTd>{question.level}</StyledTd>
+        </StyledTr>
+      );
     });
-    return (
-      <StyledTr key={question.questionID}>
-        <StyledTd>
-          <StyledLink to={`question/${question.questionID}`}>{question.title}</StyledLink>
-        </StyledTd>
-        <StyledTd>
-          {question.answeredCorrectly && <CheckBox />}
-          {!question.answeredCorrectly && <CheckBoxOutlineBlank />}
-        </StyledTd>
-        <StyledTd>{tagsText}</StyledTd>
-        <StyledTd>{question.level}</StyledTd>
-      </StyledTr>
-    );
-  });
   return (
     <StyledTable>
       <thead>
