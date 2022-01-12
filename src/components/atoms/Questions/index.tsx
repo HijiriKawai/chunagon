@@ -44,7 +44,7 @@ const StyledLink = styled(Link)`
 
 export const Questions: VFC<QuestionsProps> = (props: QuestionsProps) => {
   const { questions } = props;
-  const items = questions
+  const items = [...questions]
     .sort((a, b) => {
       return a.level - b.level;
     })
