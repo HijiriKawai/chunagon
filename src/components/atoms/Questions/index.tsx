@@ -44,6 +44,9 @@ const StyledLink = styled(Link)`
 
 export const Questions: VFC<QuestionsProps> = (props: QuestionsProps) => {
   const { questions } = props;
+  questions.sort((a, b) => {
+    return a.level - b.level;
+  });
   const items = questions.map((question) => {
     const tagsText = question.tags.map((tag) => {
       return <Typography key={tag.id}>{tag.name}</Typography>;
