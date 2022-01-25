@@ -2,9 +2,13 @@
 /* eslint-disable no-console */
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable @typescript-eslint/no-implied-eval */
-import { Container, Paper, Typography } from '@mui/material';
+import { setTimeout } from 'timers';
+
+import { Container, Paper, Typography, Modal as MUIModal, Box } from '@mui/material';
+import { SxProps, Theme } from '@mui/system';
 import axios from 'axios';
 import { useEffect, useState, VFC } from 'react';
+import { Link } from 'react-router-dom';
 
 import AnswerRequest from '../../../models/AnswerRequest';
 import DescAndUrl from '../../../models/DescAndUrl';
@@ -27,6 +31,7 @@ export const QuestionAnswer: VFC<QuestionAnswerProps> = (props: QuestionAnswerPr
   const [title, setTitle] = useState<string>('');
   const [detail, setDetail] = useState<string>('');
   const [open, setOpen] = useState(false);
+  const [timeOutModalOpen, setTimeOutModalOpen] = useState(false);
   const [urls, setUrls] = useState<DescAndUrl[]>([]);
   const handleClose = () => setOpen(false);
   const base = baseUrl();
@@ -42,9 +47,40 @@ export const QuestionAnswer: VFC<QuestionAnswerProps> = (props: QuestionAnswerPr
     name: '関数定義',
     tutorialLink: 'https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Functions',
   };
+  const TimeOutModal = () => {
+    const style: SxProps<Theme> = {
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)',
+      width: 400,
+      bgcolor: 'background.paper',
+      border: '2px solid #000',
+      boxShadow: 24,
+      p: 4,
+      whiteSpace: 'pre-wrap',
+      overflowWrap: 'break-word',
+    };
+
+    return (
+      <MUIModal
+        open={timeOutModalOpen}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            時間切れです 次の問題に移って下さい
+          </Typography>
+          <Link to="home">一覧に戻る</Link>
+        </Box>
+      </MUIModal>
+    );
+  };
 
   useEffect(() => {
     setCode(question.defaultCode);
+    setTimeout(() => setTimeOutModalOpen(true), 600000);
   }, [question.defaultCode]);
 
   const execute = () => {
@@ -163,6 +199,7 @@ export const QuestionAnswer: VFC<QuestionAnswerProps> = (props: QuestionAnswerPr
         <p>{results}</p>
       </Paper>
       <Modal open={open} handleClose={handleClose} title={title} detail={detail} urls={urls} />
+      <TimeOutModal />
     </Container>
   );
 };
