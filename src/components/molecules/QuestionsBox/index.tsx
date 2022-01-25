@@ -1,4 +1,4 @@
-import { Container, Paper } from '@mui/material';
+import { Container, Link, Paper } from '@mui/material';
 import { VFC } from 'react';
 
 import { Question } from '../../../models/QuestionResponse';
@@ -26,6 +26,14 @@ export const QuestionsBox: VFC<QuestionsBoxProps> = (props: QuestionsBoxProps) =
         }}
       >
         <Questions questions={questions} />
+        <Link
+          variant="h3"
+          underline="none"
+          href="https://forms.gle/Xpa2QDUeQW3yazrJ8"
+          sx={{ paddingTop: 8, paddingBottom: 8, paddingLeft: 8, paddingRight: 8 }}
+        >
+          アンケートはこちらから
+        </Link>
       </Paper>
     </Container>
   );
