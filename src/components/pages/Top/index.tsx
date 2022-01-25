@@ -1,4 +1,13 @@
-import { Container, Paper, Stack, Typography } from '@mui/material';
+import {
+  Box,
+  Container,
+  List,
+  ListItem,
+  ListItemText,
+  Paper,
+  Stack,
+  Typography,
+} from '@mui/material';
 import { VFC } from 'react';
 
 export const Top: VFC = () => {
@@ -22,6 +31,27 @@ export const Top: VFC = () => {
           mb={12}
         >
           <Typography variant="h2">Chunagonへようこそ!</Typography>
+          <Box
+            sx={{
+              justifyContent: 'center',
+              display: 'flex',
+              alignItems: 'center',
+              flexDirection: 'column',
+            }}
+          >
+            <Typography variant="h3">実験の流れ</Typography>
+            <List dense>
+              <ListItem>
+                <ListItemText primary="1. homeを押し問題一覧ページに移動" />
+              </ListItem>
+              <ListItem>
+                <ListItemText primary="2. 問題を上から全て解く" />
+              </ListItem>
+              <ListItem>
+                <ListItemText primary="3. アンケートに答える" />
+              </ListItem>
+            </List>
+          </Box>
         </Stack>
       </Paper>
     </Container>
