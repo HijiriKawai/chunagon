@@ -7,8 +7,6 @@ import { LoadingBox } from '../../molecules/LoadingBox';
 import { QuestionAnswer } from '../../molecules/QuestionAnswer';
 import { QuestionAnswerDash } from '../../molecules/QuestionAnswerDash';
 
-const uuidParse = require('uuid').parse;
-
 type QuestionDetailProps = {
   status: CommunicationStatus;
   question: QuestionDetailResponse;
@@ -19,17 +17,12 @@ export const QuestionDetail: VFC<QuestionDetailProps> = (props: QuestionDetailPr
   let isDash = false;
   const uuid = localStorage.getItem('chunagon_auth');
   if (uuid) {
-    try {
-      const parsedUuid = uuidParse(uuid);
-      const buffer = Buffer.from(parsedUuid);
-      const result = buffer.readUInt32BE(0);
-      if (result % 2 === 0) {
-        isDash = true;
-      } else {
-        isDash = false;
-      }
-    } catch {
+    const firstLetter = uuid.charAt(0);
+    const result = parseInt(firstLetter, 16);
+    if (result % 2 === 0) {
       isDash = true;
+    } else {
+      isDash = false;
     }
   }
   let QuestionAns = QuestionAnswer;
