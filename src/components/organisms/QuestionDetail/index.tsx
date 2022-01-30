@@ -19,13 +19,17 @@ export const QuestionDetail: VFC<QuestionDetailProps> = (props: QuestionDetailPr
   const [isDash, setIsDash] = useState<boolean>(false);
   const uuid = localStorage.getItem('chunagon_auth');
   if (uuid) {
-    const parsedUuid = uuidParse(uuid);
-    const buffer = Buffer.from(parsedUuid);
-    const result = buffer.readUInt32BE(0);
-    if (result % 2 === 0) {
+    try {
+      const parsedUuid = uuidParse(uuid);
+      const buffer = Buffer.from(parsedUuid);
+      const result = buffer.readUInt32BE(0);
+      if (result % 2 === 0) {
+        setIsDash(true);
+      } else {
+        setIsDash(false);
+      }
+    } catch {
       setIsDash(true);
-    } else {
-      setIsDash(false);
     }
   }
   let QuestionAns = QuestionAnswer;
