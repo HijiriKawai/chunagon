@@ -25,12 +25,19 @@ export const QuestionDetail: VFC<QuestionDetailProps> = (props: QuestionDetailPr
       isDash = false;
     }
   }
-  let QuestionAns = QuestionAnswer;
   if (isDash) {
-    QuestionAns = QuestionAnswerDash;
+    const questionDetail = {
+      OK: QuestionAnswerDash,
+      Failed: FailedBox,
+      Loading: LoadingBox,
+    };
+
+    const Component = questionDetail[status];
+
+    return <Component question={question} />;
   }
   const questionDetail = {
-    OK: QuestionAns,
+    OK: QuestionAnswer,
     Failed: FailedBox,
     Loading: LoadingBox,
   };
