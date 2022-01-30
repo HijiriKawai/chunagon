@@ -1,4 +1,4 @@
-import { useState, VFC } from 'react';
+import { VFC } from 'react';
 
 import { Question } from '../../../models/QuestionResponse';
 import CommunicationStatus from '../../../utils/CommunicationStatusType';
@@ -16,7 +16,7 @@ type QuestionListProps = {
 
 export const QuestionList: VFC<QuestionListProps> = (props: QuestionListProps) => {
   const { status, questions } = props;
-  const [isDash, setIsDash] = useState<boolean>(false);
+  let isDash = false;
   const uuid = localStorage.getItem('chunagon_auth');
   if (uuid) {
     try {
@@ -24,12 +24,12 @@ export const QuestionList: VFC<QuestionListProps> = (props: QuestionListProps) =
       const buffer = Buffer.from(parsedUuid);
       const result = buffer.readUInt32BE(0);
       if (result % 2 === 0) {
-        setIsDash(true);
+        isDash = true;
       } else {
-        setIsDash(false);
+        isDash = false;
       }
     } catch {
-      setIsDash(true);
+      isDash = true;
     }
   }
   let QuestionsB = QuestionsBox;
