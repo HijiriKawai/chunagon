@@ -23,11 +23,80 @@ type QuestionAnswerProps = {
   question: QuestionDetailResponse;
 };
 
+type ExecuteResult = {
+  result: any;
+  isError: boolean;
+};
+
+function exe(code: string, args: string): ExecuteResult {
+  if (code.indexOf('function') >= 0 && args === '') {
+    // 関数ではあるが、引数が与えられていない場合
+    // eslint-disable-next-line no-param-reassign
+    args = '()';
+  }
+
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  let executor: Function;
+  let errorLineNumberOffset = 0;
+  if (args === '') {
+    // 関数ではない場合
+    errorLineNumberOffset = 7;
+    executor = new Function(
+      `
+      const log__ = console.log;
+      try {
+        const results=[];
+        console.log = (v) => {results.push(v)};
+        ${code}
+        return {
+          result: results,
+          error: null
+        }
+      } catch(e) {
+        
+        return {result: null, error: e}
+      } finally {
+        console.log = log__;
+      }`
+    );
+  } else {
+    errorLineNumberOffset = 4;
+    executor = new Function(
+      `try {
+        return {
+          result: (()=>{return(${code}${args})})(),
+          error: null
+        }
+      } catch(e) {
+        return {result: null, error: e}
+    }`
+    );
+  }
+
+  const result = executor();
+  if (result.result !== null) {
+    const isError = false;
+    return { result: result.result, isError };
+  }
+  const isError = true;
+  const message = `${result.error.name}: ${result.error.message}`;
+  const parsed = result.error.stack.match(/<anonymous>:(\d+):(\d+)\)/);
+  const [line, col] = [parsed[1] - errorLineNumberOffset, parsed[2]];
+  return {
+    result: `${message}\n    at Code (at line ${line}, column ${col})
+        ${code.split('\n')[line - 1]}
+${' '.repeat(7 + parseInt(col, 10))}^`,
+    isError,
+  };
+}
+
 export const QuestionAnswer: VFC<QuestionAnswerProps> = (props: QuestionAnswerProps) => {
   const { question } = props;
   const [code, setCode] = useState<string>('');
   const [corrects, setCorrects] = useState<boolean[]>([]);
   const [results, setResults] = useState<any[]>([]);
+  const [errorMessages, setErrorMessages] = useState<string[]>([]);
+  const [errors, setErrors] = useState<string[]>([]);
   const [title, setTitle] = useState<string>('');
   const [detail, setDetail] = useState<string>('');
   const [open, setOpen] = useState(false);
@@ -88,35 +157,37 @@ export const QuestionAnswer: VFC<QuestionAnswerProps> = (props: QuestionAnswerPr
       for (let index = 0; index < question.testCases.length; index += 1) {
         const args = question.testCases[index].input;
         try {
-          const executor = new Function(`return ${code}${args}`);
-          const result = executor();
+          const result = exe(code, args);
           results.push(result);
-          if (`${result}` === question.testCases[index].expected) {
+          if (`${result.result}` === question.testCases[index].expected) {
             corrects.push(true);
+          }
+          if (result.isError) {
+            errorMessages.push(result.result);
           }
         } catch {
           setCorrects([]);
           setResults([]);
+          setErrorMessages([]);
         }
       }
     } else {
-      const { log } = console;
-      console.log = (v) => {
-        results.push(v);
-      };
       try {
         // eslint-disable-next-line no-eval
-        eval(`console.log = (v) => {\nresults.push(v);\n};\n${code}`);
+        const result = exe(code, '');
         for (let index = 0; index < question.testCases.length; index += 1) {
-          if (results.join('\n') === question.testCases[index].expected) {
+          if (result.result.join('\n') === question.testCases[index].expected) {
             corrects.push(true);
+          }
+          if (result.isError) {
+            errorMessages.push(result.result);
           }
         }
       } catch {
         setCorrects([]);
         setResults([]);
+        setErrorMessages([]);
       }
-      console.log = log;
     }
     const newCode = ConvertAllCode(code) as string;
     const failedAssertions = RunAssertions(question, ConvertAllToNode(newCode)) as any[];
@@ -140,8 +211,10 @@ export const QuestionAnswer: VFC<QuestionAnswerProps> = (props: QuestionAnswerPr
         .catch(() => {});
       setCorrects([]);
       setResults([]);
+      setErrorMessages([]);
       setTitle('成功');
       setDetail('');
+      setErrors([]);
       setUrls([]);
     } else {
       const post: AnswerRequest = {
@@ -162,6 +235,11 @@ export const QuestionAnswer: VFC<QuestionAnswerProps> = (props: QuestionAnswerPr
         .catch(() => {});
       setCorrects([]);
       setResults([]);
+      const uniqueErrors = errorMessages.filter(
+        (element, index, self) => self.findIndex((e) => e === element) === index
+      );
+      setErrors(uniqueErrors);
+      setErrorMessages([]);
       setTitle('失敗');
       const message = failedAssertions.map((j) => j.message).join('\n');
       const tagUrlToName: DescAndUrl[] = [];
@@ -198,7 +276,14 @@ export const QuestionAnswer: VFC<QuestionAnswerProps> = (props: QuestionAnswerPr
         <Button value="実行" onClick={execute} sx={{ marginTop: 2, marginBottom: 8 }} />
         <p>{results}</p>
       </Paper>
-      <Modal open={open} handleClose={handleClose} title={title} detail={detail} urls={urls} />
+      <Modal
+        open={open}
+        handleClose={handleClose}
+        title={title}
+        detail={detail}
+        urls={urls}
+        errors={errors}
+      />
       <TimeOutModal />
     </Container>
   );

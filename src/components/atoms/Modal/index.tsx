@@ -10,6 +10,7 @@ type ModalProps = {
   handleClose: () => void;
   title: string;
   detail: string;
+  errors: string[];
   urls: DescAndUrl[];
 };
 
@@ -28,7 +29,7 @@ const style: SxProps<Theme> = {
 };
 
 export const Modal: VFC<ModalProps> = (props: ModalProps) => {
-  const { open, handleClose, title, detail, urls } = props;
+  const { open, handleClose, title, detail, urls, errors } = props;
   if (urls.length) {
     const Urls = urls.map((url) => {
       return (
@@ -38,6 +39,10 @@ export const Modal: VFC<ModalProps> = (props: ModalProps) => {
         </Box>
       );
     });
+    const Errors = errors.map((error) => {
+      return <Box key={error}>{`${error}`}</Box>;
+    });
+
     return (
       <MUIModal
         open={open}
@@ -56,6 +61,10 @@ export const Modal: VFC<ModalProps> = (props: ModalProps) => {
             学習すべき内容:
           </Typography>
           <Box>{Urls}</Box>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            エラー:
+          </Typography>
+          <Box>{Errors}</Box>
         </Box>
       </MUIModal>
     );
