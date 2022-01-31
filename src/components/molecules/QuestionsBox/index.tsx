@@ -30,6 +30,8 @@ export const QuestionsBox: VFC<QuestionsBoxProps> = (props: QuestionsBoxProps) =
           variant="h3"
           underline="none"
           href="https://forms.gle/Xpa2QDUeQW3yazrJ8"
+          target="_blank"
+          rel="noopener noreferrer"
           sx={{ paddingTop: 8, paddingBottom: 8, paddingLeft: 8, paddingRight: 8 }}
         >
           アンケートはこちらから

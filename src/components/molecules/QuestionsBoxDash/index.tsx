@@ -30,6 +30,8 @@ export const QuestionsBoxDash: VFC<QuestionsBoxProps> = (props: QuestionsBoxProp
           variant="h3"
           underline="none"
           href="https://forms.gle/9F9RDYszRXUV6GPz9"
+          target="_blank"
+          rel="noopener noreferrer"
           sx={{ paddingTop: 8, paddingBottom: 8, paddingLeft: 8, paddingRight: 8 }}
         >
           アンケートはこちらから

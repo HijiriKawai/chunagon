@@ -35,7 +35,9 @@ export const Modal: VFC<ModalProps> = (props: ModalProps) => {
       return (
         <Box key={url.url}>
           {`${url.desc}:\n`}
-          <a href={url.url}>{url.url}</a>
+          <a href={url.url} target="_blank" rel="noopener noreferrer">
+            {url.url}
+          </a>
         </Box>
       );
     });
