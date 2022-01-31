@@ -15,9 +15,13 @@ type QuestionListProps = {
 export const QuestionList: VFC<QuestionListProps> = (props: QuestionListProps) => {
   const { status, questions } = props;
   let isDash = false;
-  const uuid = localStorage.getItem('chunagon_auth');
-  if (uuid) {
-    const firstLetter = uuid.charAt(0);
+  const storageItem = localStorage.getItem('chunagon_auth');
+  let token = '';
+  if (storageItem != null) {
+    token = JSON.parse(storageItem);
+  }
+  if (token !== '') {
+    const firstLetter = token.charAt(0);
     const result = parseInt(firstLetter, 16);
     if (result % 2 === 0) {
       isDash = true;
