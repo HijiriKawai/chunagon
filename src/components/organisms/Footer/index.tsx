@@ -21,10 +21,9 @@ export const Footer: VFC = () => {
     <StyledFooter>
       <ul>
         <FooterMenuItem>
-          <Link to="/">Home</Link>
+          <Link to="/">Top</Link>
         </FooterMenuItem>
       </ul>
-      <p>© 2021 HijiriKawai</p>
     </StyledFooter>
   );
 };
